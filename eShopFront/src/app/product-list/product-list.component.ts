@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Product} from '../product';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Product } from '../product';
 
-import {ProductService} from '../product.service'
+import { ProductService } from '../product.service'
 
 @Component({
   selector: 'app-product-list',
@@ -12,26 +12,28 @@ export class ProductListComponent implements OnInit {
 
   products: Product[];
 
-  constructor(service:ProductService) {
-    service.getProducts().subscribe(
-      products => {
-        this.products = products;
-      }
-    );
+  constructor(private service: ProductService, private ref: ChangeDetectorRef) {
+    
   }
 
   ngOnInit() {
+    this.refreshProductList();
   }
 
-  fileChange(event){
-    let fileList: FileList = event.target.files;
-    if (fileList.length > 0) {
-      let file: File = fileList[0];
-      let formData: FormData = new FormData();
-      formData.append("file", file);
-      
-      console.log(formData);
-    }
+  deleteProduct(id: number): void {
+    this.service.deleteProduct(id)
+      .subscribe(
+        res => this.refreshProductList()
+      );
+  }
+
+  refreshProductList():void {
+    this.service.getProducts().subscribe(
+      products => {
+        this.products = products;
+        console.log(products);
+      }
+    );
   }
 
 }

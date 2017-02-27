@@ -48,7 +48,9 @@ export class ProductCreatorComponent implements OnInit {
   onSubmit(pic: any):void{
     let product: Product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, this.pic);
     console.log(product);
-    this.service.saveProduct(product);
+    this.service.saveProduct(product).subscribe(
+      res => console.log(res)
+    );
   }
 
 }

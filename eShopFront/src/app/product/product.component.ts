@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {Product} from '../product';
 import {DomSanitizer} from '@angular/platform-browser';
 
@@ -10,12 +10,24 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class ProductComponent implements OnInit {
   @Input() private product:Product;
+  @Output() private delete:EventEmitter<number>;
+  @Output() private edit:EventEmitter<number>;
 
   constructor(private sanitiser:DomSanitizer) {
-    
+    this.delete = new EventEmitter<number>();
+    this.edit = new EventEmitter<number>();
    }
 
   ngOnInit() {
+
+  }
+
+  deleteProduct():void{
+    this.delete.emit(this.product.id);
+  }
+
+  editProduct():void{
+    this.edit.emit(this.product.id);
   }
 
 }
