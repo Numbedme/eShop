@@ -13,7 +13,9 @@ import {appRoutes} from './app.routing';
 import { ProductCreatorComponent } from './product-creator/product-creator.component';
 
 import {ProductService} from './product.service';
-import { ProductComponent } from './product/product.component'
+import { ProductComponent } from './product/product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { ImageComponent } from './image/image.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ProductComponent } from './product/product.component'
     ProductListComponent,
     ProductCreatorComponent,
     ProductComponent,
+    EditProductComponent,
+    ImageComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Product } from '../product';
 
+import {Router, ActivatedRoute} from '@angular/router';
+
 import { ProductService } from '../product.service'
 
 @Component({
@@ -12,7 +14,7 @@ export class ProductListComponent implements OnInit {
 
   products: Product[];
 
-  constructor(private service: ProductService, private ref: ChangeDetectorRef) {
+  constructor(private service: ProductService, private router:Router) {
     
   }
 
@@ -34,6 +36,10 @@ export class ProductListComponent implements OnInit {
         console.log(products);
       }
     );
+  }
+
+  editProduct(id:number):void {
+    this.router.navigate(['/edit', id]);
   }
 
 }

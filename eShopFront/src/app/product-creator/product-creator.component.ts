@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from '../product.service';
-import {Product} from '../product';
-import {FormBuilder, AbstractControl, FormGroup, FormControl, Validators} from '@angular/forms'
+import { ProductService } from '../product.service';
+import { Product } from '../product';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, AbstractControl, FormGroup, FormControl, Validators } from '@angular/forms'
 
 
 @Component({
@@ -18,8 +19,19 @@ export class ProductCreatorComponent implements OnInit {
   private date: AbstractControl;
   private pic: string;
 
-  constructor(private service:ProductService, private fb: FormBuilder) {
-    this.form = fb.group({
+  private product: Product;
+
+  private edit: boolean;
+
+  private text: string = "Add a picture";
+
+  constructor(private service: ProductService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute) { }
+
+  ngOnInit() {
+
+    this.form = this.fb.group({
       'name': ['', Validators.required],
       'desc': ['', Validators.required],
       'price': ['', Validators.required],
@@ -31,23 +43,22 @@ export class ProductCreatorComponent implements OnInit {
     this.desc = this.form.controls['desc'];
     this.price = this.form.controls['price'];
     this.date = this.form.controls['date'];
-   }
-
-  ngOnInit() {
   }
 
-  onChange(event){
-    let file:File = event.target.files[0];
-    let fr: FileReader = new FileReader();
-    fr.onloadend = (e) => {
-      this.pic = fr.result;
+  onChange(event) {
+    let file: File = event.target.files[0];
+    if (file) {
+      let fr: FileReader = new FileReader();
+      fr.onloadend = (e) => {
+        this.pic = fr.result;
+      }
+      fr.readAsDataURL(file);
     }
-    fr.readAsDataURL(file);
+
   }
 
-  onSubmit(pic: any):void{
+  onSubmit(pic: any): void {
     let product: Product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, this.pic);
-    console.log(product);
     this.service.saveProduct(product).subscribe(
       res => console.log(res)
     );

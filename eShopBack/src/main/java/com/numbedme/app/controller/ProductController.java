@@ -26,10 +26,17 @@ public class ProductController {
         return service.findAllProducts();
     }
 
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public Product getProduct(@PathVariable("id") int id) {
+        return service.findById(id);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public void postProduct(@RequestBody() Product product){
         System.out.println(product);
         service.persistProduct(product);
+        String s;
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)

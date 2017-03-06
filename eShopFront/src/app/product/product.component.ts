@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {Product} from '../product';
-import {DomSanitizer} from '@angular/platform-browser';
+
 
 
 @Component({
@@ -13,7 +13,7 @@ export class ProductComponent implements OnInit {
   @Output() private delete:EventEmitter<number>;
   @Output() private edit:EventEmitter<number>;
 
-  constructor(private sanitiser:DomSanitizer) {
+  constructor() {
     this.delete = new EventEmitter<number>();
     this.edit = new EventEmitter<number>();
    }

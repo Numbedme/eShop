@@ -1,0 +1,6 @@
+<div class = "thumbnail" *ngIf="this.imageBase64">
+  <img [src]="sanitiser.bypassSecurityTrustUrl(this.imageBase64)" alt="{{this.altText}}">
+</div>
+<div class = "thumbnail" *ngIf="!this.imageBase64">
+  <img src="img/placeholder.png">
+</div>
