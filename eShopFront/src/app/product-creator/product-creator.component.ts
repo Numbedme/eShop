@@ -21,8 +21,6 @@ export class ProductCreatorComponent implements OnInit {
 
   private product: Product;
 
-  private edit: boolean;
-
   private text: string = "Add a picture";
 
   constructor(private service: ProductService,
@@ -55,6 +53,10 @@ export class ProductCreatorComponent implements OnInit {
       fr.readAsDataURL(file);
     }
 
+  }
+
+  deletePic():void {
+    this.pic = null;
   }
 
   onSubmit(pic: any): void {

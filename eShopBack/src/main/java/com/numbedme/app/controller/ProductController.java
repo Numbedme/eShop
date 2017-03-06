@@ -34,10 +34,14 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void postProduct(@RequestBody() Product product){
-        System.out.println(product);
         service.persistProduct(product);
-        String s;
     }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public void putProduct(@RequestBody() Product product){
+        service.updateProduct(product);
+    }
+
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     public void deleteProduct(@PathVariable("id") int id){

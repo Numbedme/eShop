@@ -20,6 +20,14 @@ public class ProductRepositoryImpl extends AbstractRepository<Integer, Product> 
 
     @Override
     public void updateProduct(Product product) {
+        Product cache = findById(product.getId());
+
+        cache.setName(product.getName());
+        cache.setStartDate(product.getStartDate());
+        cache.setDescription(product.getDescription());
+        cache.setPicture(product.getPicture());
+        cache.setPrice(product.getPrice());
+
         update(product);
     }
 

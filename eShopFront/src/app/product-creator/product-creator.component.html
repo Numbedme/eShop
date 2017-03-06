@@ -27,8 +27,13 @@
             </div>
             <div class="form-group">
               <label for="pic">Picture: </label>
-              <input type="file" id="pic" name="pic" (change)="onChange($event)" class="form-control" accept="image/*">
-              <app-image [imageBase64]="this.pic" [altText]="this.text"></app-image>
+                <div *ngIf="!this.pic">
+                  <input type="file" id="pic" name="pic" (change)="onChange($event)" class="form-control" accept="image/*">
+                </div>
+                <app-image [imageBase64]="this.pic" [altText]="this.text"></app-image>
+                <div *ngIf="this.pic">
+                  <input type="button" (click)="deletePic()" value="Delete picture" />
+                </div>
             </div>
             <input type="submit" value="Add" [disabled]="!form.valid" class="btn btn-default pull-right">
           </form>

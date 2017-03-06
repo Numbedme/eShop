@@ -36,7 +36,7 @@ public abstract class AbstractRepository<PK extends Serializable, T> {
     }
 
     public void update(T entity) {
-        getSession().update(entity);
+        getSession().merge(entity);
     }
 
     public void delete(T entity) {
