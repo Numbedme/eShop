@@ -48,22 +48,24 @@ export class ProductCreatorComponent implements OnInit {
     if (file) {
       let fr: FileReader = new FileReader();
       fr.onloadend = (e) => {
-        this.pic = fr.result;
+        if (fr.result.startsWith("data:image")) {
+          this.pic = fr.result;
+        }
       }
       fr.readAsDataURL(file);
     }
 
   }
 
-  deletePic():void {
+  deletePic(): void {
     this.pic = null;
   }
 
   onSubmit(pic: any): void {
-    let product: Product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, this.pic);
-    this.service.saveProduct(product).subscribe(
-      res => console.log(res)
-    );
+      let product: Product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, this.pic);
+      this.service.saveProduct(product).subscribe(
+        res => console.log(res)
+      );
   }
 
 }

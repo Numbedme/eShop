@@ -15,7 +15,8 @@ import { ProductCreatorComponent } from './product-creator/product-creator.compo
 import {ProductService} from './product.service';
 import { ProductComponent } from './product/product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
-import { ImageComponent } from './image/image.component'
+import { ImageComponent } from './image/image.component';
+import { CustomerRegistrationComponent } from './customer-registration/customer-registration.component'
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ImageComponent } from './image/image.component'
     ProductComponent,
     EditProductComponent,
     ImageComponent,
+    CustomerRegistrationComponent,
   ],
   imports: [
     BrowserModule,

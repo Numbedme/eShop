@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
-import {ProductService} from '../product.service';
-import {Product} from '../product';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProductService } from '../product.service';
+import { Product } from '../product';
 import { FormBuilder, AbstractControl, FormGroup, FormControl, Validators } from '@angular/forms'
 
 @Component({
@@ -22,28 +22,28 @@ export class EditProductComponent implements OnInit {
 
 
   constructor(private router: Router,
-              private service: ProductService,
-              private fb: FormBuilder,
-              private route: ActivatedRoute) { }
+    private service: ProductService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params
-    .switchMap((params) => this.service.getProduct(+params['id']))
-    .subscribe((product: Product) => {
-      this.product = product;
-      this.form = this.fb.group({
-      'name': [product.name, Validators.required],
-      'desc': [product.description, Validators.required],
-      'price': [product.price, Validators.required],
-      'date': [product.startDate, Validators.required],
-      'pic': '',
-    });
-    this.name = this.form.controls['name'];
-    this.desc = this.form.controls['desc'];
-    this.price = this.form.controls['price'];
-    this.date = this.form.controls['date'];
-    this.pic = product.picture;
-    });
+      .switchMap((params) => this.service.getProduct(+params['id']))
+      .subscribe((product: Product) => {
+        this.product = product;
+        this.form = this.fb.group({
+          'name': [product.name, Validators.required],
+          'desc': [product.description, Validators.required],
+          'price': [product.price, Validators.required],
+          'date': [product.startDate, Validators.required],
+          'pic': '',
+        });
+        this.name = this.form.controls['name'];
+        this.desc = this.form.controls['desc'];
+        this.price = this.form.controls['price'];
+        this.date = this.form.controls['date'];
+        this.pic = product.picture;
+      });
   }
 
   onChange(event) {
@@ -57,16 +57,19 @@ export class EditProductComponent implements OnInit {
     }
   }
 
-  deletePic():void {
+  deletePic(): void {
     this.pic = null;
   }
 
   onSubmit(): void {
-    let product: Product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, this.pic);
-    product.id = this.product.id;
-    this.service.updateProduct(product).subscribe(
-      res => console.log(res)
-    );
+    if (this.pic.startsWith("data:image")) {
+      let product: Product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, this.pic);
+      product.id = this.product.id;
+      this.service.updateProduct(product).subscribe(
+        res => console.log(res)
+      );
+    }
+
   }
 
 }

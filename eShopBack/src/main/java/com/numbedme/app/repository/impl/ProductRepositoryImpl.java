@@ -3,6 +3,8 @@ package com.numbedme.app.repository.impl;
 import com.numbedme.app.model.Product;
 import com.numbedme.app.repository.AbstractRepository;
 import com.numbedme.app.repository.ProductRepository;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -45,6 +47,12 @@ public class ProductRepositoryImpl extends AbstractRepository<Integer, Product> 
     @SuppressWarnings("unchecked")
     public List<Product> findAllProducts() {
         return (List<Product>)createEntityCriteria().list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Product> findByPattern(String pattern) {
+        return (List<Product>)createEntityCriteria().add(Restrictions.like("name", pattern, MatchMode.ANYWHERE)).list();
     }
 
 }

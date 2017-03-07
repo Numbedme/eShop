@@ -17,4 +17,6 @@ public interface ProductRepository {
     void persistProduct(Product product);
 
     List<Product> findAllProducts();
+
+    List findByPattern(String pattern);
 }

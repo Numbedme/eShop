@@ -44,4 +44,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAllProducts() {
         return repository.findAllProducts();
     }
+
+    @Override
+    public List<Product> findByPattern(String pattern) {
+        return repository.findByPattern(pattern);
+    }
 }

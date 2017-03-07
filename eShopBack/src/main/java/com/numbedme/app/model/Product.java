@@ -21,17 +21,15 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Size(min = 3, max = 50)
     private String name;
 
-    @Digits(integer = 4, fraction = 2)
     private Double price;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date startDate;
 
-    @Size(min = 10, max = 200)
+    @Lob
     private String description;
 
     @Lob

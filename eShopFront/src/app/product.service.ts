@@ -7,7 +7,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class ProductService {
 
-  url: string = "http://localhost:8080/eShop/product/";
+  url: string = "http://localhost:8080/eShop/product";
 
   constructor(private http:Http) { }
 
@@ -16,19 +16,23 @@ export class ProductService {
   }
 
   saveProduct(product:Product):Observable<any>{
-    return this.http.post(this.url, product);
+    return this.http.post(this.url + '/', product);
   }
 
   deleteProduct(id:number):Observable<any>{
-    return this.http.delete(this.url + id);
+    return this.http.delete(this.url + '/' + id);
   }
 
   getProduct(id:number):Observable<Product>{
-    return this.http.get(this.url + id).map(res => res.json());
+    return this.http.get(this.url + '/' + id).map(res => res.json());
   }
 
   updateProduct(product:Product):Observable<any>{
-    return this.http.put(this.url, product);
+    return this.http.put(this.url + '/', product);
+  }
+
+  getProductsByPattern(pattern: string):Observable<Product[]>{
+    return this.http.get(this.url + '?name=' + pattern).map((res) => res.json());
   }
 
 }

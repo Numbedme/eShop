@@ -20,4 +20,6 @@ public interface ProductService {
     void persistProduct(Product product);
 
     List<Product> findAllProducts();
+
+    List<Product> findByPattern(String pattern);
 }

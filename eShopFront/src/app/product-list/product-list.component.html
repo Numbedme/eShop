@@ -1,3 +1,5 @@
-<div *ngFor="let product of products">
-  <app-product [product]="product" (delete)="deleteProduct($event)" (edit)="editProduct($event)"></app-product>
+<div *ngIf="products">
+  <div *ngFor="let product of products">
+    <app-product [product]="product" (delete)="deleteProduct($event)" (edit)="editProduct($event)"></app-product>
+  </div>
 </div>

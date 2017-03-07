@@ -7,6 +7,11 @@ import {ProductCreatorComponent} from './product-creator/product-creator.compone
 export const appRoutes: Routes = [
     {
         path:'',
+        redirectTo: 'home',
+        pathMatch:'full'
+    },
+    {
+        path:"home",
         component: ProductListComponent
     },
     {
@@ -16,5 +21,9 @@ export const appRoutes: Routes = [
     {
         path: 'edit/:id',
         component: EditProductComponent
+    },
+    {
+        path:'search/:pattern',
+        component: ProductListComponent
     }
 ];

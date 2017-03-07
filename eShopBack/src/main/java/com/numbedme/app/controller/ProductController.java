@@ -3,10 +3,7 @@ package com.numbedme.app.controller;
 import com.numbedme.app.model.Product;
 import com.numbedme.app.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +19,12 @@ public class ProductController {
     private ProductService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Product> getProducts() {
-        return service.findAllProducts();
+    public List<Product> getProducts(@RequestParam(value = "name", required = false) String pattern) {
+        if (pattern != null){
+            return service.findByPattern(pattern);
+        } else{
+            return service.findAllProducts();
+        }
     }
 
 
