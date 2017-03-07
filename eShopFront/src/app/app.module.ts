@@ -13,10 +13,13 @@ import {appRoutes} from './app.routing';
 import { ProductCreatorComponent } from './product-creator/product-creator.component';
 
 import {ProductService} from './product.service';
+import {UtilService} from './util.service';
+import {CustomerService} from './customer.service';
 import { ProductComponent } from './product/product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { ImageComponent } from './image/image.component';
-import { CustomerRegistrationComponent } from './customer-registration/customer-registration.component'
+import { CustomerRegistrationComponent } from './customer-registration/customer-registration.component';
+import { LoginComponent } from './login/login.component'
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { CustomerRegistrationComponent } from './customer-registration/customer-
     EditProductComponent,
     ImageComponent,
     CustomerRegistrationComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,7 @@ import { CustomerRegistrationComponent } from './customer-registration/customer-
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ProductService],
+  providers: [ProductService, CustomerService, UtilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

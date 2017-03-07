@@ -36,6 +36,17 @@ public class Product implements Serializable {
     @Basic(fetch = FetchType.LAZY)
     private String picture;
 
+    @ManyToOne
+    private Customer customer;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public String getPicture() {
         return picture;
     }
@@ -98,8 +109,12 @@ public class Product implements Serializable {
             return false;
         if (getDescription() != null ? !getDescription().equals(product.getDescription()) : product.getDescription() != null)
             return false;
-        return getPicture() != null ? getPicture().equals(product.getPicture()) : product.getPicture() == null;
+        if (getPicture() != null ? !getPicture().equals(product.getPicture()) : product.getPicture() != null)
+            return false;
+        if (getCustomer() != null ? !getCustomer().equals(product.getCustomer()) : product.getCustomer() != null)
+            return false;
 
+        return true;
     }
 
     @Override
@@ -110,6 +125,7 @@ public class Product implements Serializable {
         result = 31 * result + (getStartDate() != null ? getStartDate().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
         result = 31 * result + (getPicture() != null ? getPicture().hashCode() : 0);
+        result = 31 * result + (getCustomer() != null ? getCustomer().hashCode() : 0);
         return result;
     }
 
@@ -122,6 +138,7 @@ public class Product implements Serializable {
                 ", startDate=" + startDate +
                 ", description='" + description + '\'' +
                 ", picture='" + picture + '\'' +
+                ", customer=" + customer +
                 '}';
     }
 }

@@ -42,7 +42,7 @@ export class ProductListComponent implements OnInit {
   refreshProductList(): void {
     if (this.search) {
       this.route.params
-        .switchMap((params) => this.service.getProductsByPattern(this.pattern))
+        .switchMap((params) => this.service.getProductsByName(this.pattern))
         .subscribe((products: Product[]) => {
           this.products = products;
         })

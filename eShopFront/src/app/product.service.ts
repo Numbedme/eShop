@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 import {Product} from './product'
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
+import {UtilService} from './util.service';
 import 'rxjs/Rx';
 
 @Injectable()
 export class ProductService {
 
-  url: string = "http://localhost:8080/eShop/product";
+  private url: string;
 
-  constructor(private http:Http) { }
+  constructor(private http:Http,
+              private util:UtilService) {
+                this.url = util.url + '/product';
+               }
 
   getProducts():Observable<Product[]>{
     return this.http.get(this.url).map(res => res.json());
@@ -31,7 +35,7 @@ export class ProductService {
     return this.http.put(this.url + '/', product);
   }
 
-  getProductsByPattern(pattern: string):Observable<Product[]>{
+  getProductsByName(pattern: string):Observable<Product[]>{
     return this.http.get(this.url + '?name=' + pattern).map((res) => res.json());
   }
 

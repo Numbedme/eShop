@@ -1,15 +1,13 @@
-package com.numbedme.app.repository;
+package com.numbedme.app.service;
 
 import com.numbedme.app.model.Customer;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * Created by User on 06.03.2017.
+ * Created by User on 07.03.2017.
  */
-
-public interface CustomerRepository {
+public interface CustomerService {
     Customer findById(int id);
 
     Customer findByLogin(String login);

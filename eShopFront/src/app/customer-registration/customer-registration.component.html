@@ -1,3 +1,30 @@
-<p>
-  customer-registration works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <form class="form" [formGroup]="form" (ngSubmmit)="onSubmit()">
+        <div class="from-group">
+          <label for="login">Login: </label>
+          <input type="text" id="login" class="form-control" placeholder="Login..." [formControl]="login">
+        </div>
+        <div class="from-group">
+          <label for="password">Password: </label>
+          <input type="password" id="password" class="form-control" placeholder="Password..." [formControl]="password">
+        </div>
+        <div class="from-group">
+          <label for="passwordConf">Confirm password: </label>
+          <input type="password" id="passwordConf" class="form-control" placeholder="Confirmation..." [formControl]="confirm">
+        </div>
+        <div class="from-group">
+          <label for="email">Email: </label>
+          <input type="text" id="email" class="form-control" placeholder="Email..." [formControl]="email">
+        </div>
+        <br/>
+        <div class="from-group">
+          <input type="submit" class="btn btn-accept pull-right" [disabled]="!form.valid">
+        </div>
+      </form>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>
