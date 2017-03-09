@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import {CustomerService} from '../customer.service';
-import {Customer} from '../customer';
-import {Router} from '@angular/router';
+import { CustomerService } from '../customer.service';
+import { Customer } from '../customer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-registration',
@@ -11,17 +11,21 @@ import {Router} from '@angular/router';
 })
 export class CustomerRegistrationComponent implements OnInit {
 
-  private form:FormGroup;
+  private form: FormGroup;
 
-  private login:AbstractControl;
-  private password:AbstractControl;
-  private confirm:AbstractControl;
-  private email:AbstractControl;
+  private login: AbstractControl;
+  private password: AbstractControl;
+  private confirm: AbstractControl;
+  private email: AbstractControl;
+
+  private success: boolean = false;
+  private fail: boolean = false;
+  private failText: string;
 
 
   constructor(private service: CustomerService,
-              private builder: FormBuilder,
-              private router: Router) { }
+    private builder: FormBuilder,
+    private router: Router) { }
 
   ngOnInit() {
     this.form = this.builder.group({
@@ -37,17 +41,16 @@ export class CustomerRegistrationComponent implements OnInit {
     this.email = this.form.controls['email'];
   }
 
-  onSubmit():void{
-    if (this.password.value === this.confirm.value){
-      let customer:Customer = new Customer(this.login.value,
-                                           this.password.value,
-                                           this.email.value);
-    this.service.createCustomer(customer)
-      .subscribe((customer:Customer) => {
-
-      });
-    }else{
-
+  onSubmit(): void {
+    if (this.password.value === this.confirm.value) {
+      let customer: Customer = new Customer(this.login.value,
+        this.password.value,
+        this.email.value);
+      this.success = true;
+      this.fail = false;
+    } else {
+      this.fail = true;
+      this.failText = "Failed";
     }
   }
 
