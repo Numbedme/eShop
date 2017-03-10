@@ -4,10 +4,10 @@
 **/dist/
 **/tmp/
 **/temp/
+**/target/
 
 # dependencies
 **/node_modules/
-*/target/
 
 # IDEs and editors
 **/.idea/
