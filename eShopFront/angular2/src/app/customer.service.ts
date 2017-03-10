@@ -14,7 +14,7 @@ export class CustomerService {
 
   constructor(private http:Http,
               private util:UtilService) {
-                this.url = util.url + '/customer';
+                this.url = util.url + '/customers';
                }
 
   createCustomer(customer: Customer): Observable<any> {
@@ -23,6 +23,14 @@ export class CustomerService {
 
   getCustomer(login:string):Observable<Customer>{
     return this.http.get(this.url + '/' + login).map(res => res.json());
+  }
+
+  getAllCustomers():Observable<Customer[]>{
+    return this.http.get(this.url + '/').map(res => res.json());
+  }
+  
+  deleteCustomer(customer:Customer):Observable<any>{
+    return this.http.delete(this.url + '/' + customer.login);
   }
 
 }

@@ -2,33 +2,34 @@
   <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-      <div *ngIf="success">
-        <div class="alert alert-success" role="alert">User {{login.value}} is created</div>
+      <div *ngIf="this.success">
+        <div class="alert alert-success" role="alert">User {{login.value}} has been created</div>
       </div>
       <div *ngIf="fail">
         <div class="alert alert-warning" role="alert">{{failText}}</div>
       </div>
 
-      <form class="form" [formGroup]="form" (ngSubmmit)="onSubmit()">
-        <div class="from-group">
+      <form class="form" [formGroup]="form">
+        <div class="form-group">
           <label for="login">Login: </label>
           <input type="text" id="login" class="form-control" placeholder="Login..." [formControl]="login">
         </div>
-        <div class="from-group">
+        <div class="form-group">
           <label for="password">Password: </label>
           <input type="password" id="password" class="form-control" placeholder="Password..." [formControl]="password">
         </div>
-        <div class="from-group">
+        <div class="form-group">
           <label for="passwordConf">Confirm password: </label>
-          <input type="password" id="passwordConf" class="form-control" placeholder="Confirmation..." [formControl]="confirm">
+          <input type="password" id="passwordConf" class="form-control" placeholder="Confirmation..."
+                 [formControl]="confirm">
         </div>
-        <div class="from-group">
+        <div class="form-group">
           <label for="email">Email: </label>
           <input type="text" id="email" class="form-control" placeholder="Email..." [formControl]="email">
         </div>
         <br/>
-        <div class="from-group">
-          <input type="submit" class="btn btn-accept pull-right" [disabled]="!form.valid">
+        <div class="form-group">
+          <input type="button" (click)="onSubmit()" class="btn btn-accept pull-right" [disabled]="!form.valid" value="Create">
         </div>
       </form>
     </div>

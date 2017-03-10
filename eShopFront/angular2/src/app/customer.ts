@@ -5,9 +5,9 @@ export class Customer {
     public id:number;
     public orders:Order[];
 
-    constructor(private login:string,
-                private password:string,
-                private email:string){
+    constructor(public login:string,
+                public password:string,
+                public email:string){
 
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @org.springframework.web.bind.annotation.RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
@@ -33,14 +33,18 @@ public class ProductController {
         return service.findById(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void postProduct(@RequestBody() Product product){
-        service.persistProduct(product);
+    @RequestMapping(value = "/{id}",method = RequestMethod.POST)
+    public void postProduct(@RequestBody() Product product, @PathVariable("id") String id){
+        if (id.equals(product.getId())) {
+            service.persistProduct(product);
+        }
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public void putProduct(@RequestBody() Product product){
-        service.updateProduct(product);
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    public void putProduct(@RequestBody() Product product, @PathVariable("id") String id){
+        if (id.equals(product.getId())) {
+            service.updateProduct(product);
+        }
     }
 
 

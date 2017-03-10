@@ -5,9 +5,7 @@
  - Java: 1.8.0_101
 
 ##Installation
- - mvn install
- - cd eShopBack
- - mvn tomcat7:run-war-only
+ - mvn install (will start the app)
 
 Server will start at localhost:8080/eShopFront
 

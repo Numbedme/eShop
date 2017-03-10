@@ -4,11 +4,18 @@ import com.numbedme.app.filter.CORSFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 
 /**
  * Created by User on 15.02.2017.
  */
+
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[] {AppConfig.class};
@@ -33,6 +40,15 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
-        servletContext.setInitParameter("spring.profiles.active", "test");
+
+        InputStream input = getClass().getClassLoader().getResourceAsStream("application.properties");
+        Properties props = new Properties();
+
+        try {
+            props.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        servletContext.setInitParameter("spring.profiles.active", props.getProperty("spring.profiles.active"));
     }
 }

@@ -12,7 +12,7 @@ export class ProductService {
 
   constructor(private http:Http,
               private util:UtilService) {
-                this.url = util.url + '/product';
+                this.url = util.url + '/products';
                }
 
   getProducts():Observable<Product[]>{
@@ -20,7 +20,7 @@ export class ProductService {
   }
 
   saveProduct(product:Product):Observable<any>{
-    return this.http.post(this.url + '/', product);
+    return this.http.post(this.url + '/' + product.id, product);
   }
 
   deleteProduct(id:number):Observable<any>{
@@ -32,7 +32,7 @@ export class ProductService {
   }
 
   updateProduct(product:Product):Observable<any>{
-    return this.http.put(this.url + '/', product);
+    return this.http.put(this.url + '/' + product.id, product);
   }
 
   getProductsByName(pattern: string):Observable<Product[]>{

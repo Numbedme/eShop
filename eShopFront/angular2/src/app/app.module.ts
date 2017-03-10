@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common'
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -41,7 +42,10 @@ import { LoginComponent } from './login/login.component'
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ProductService, CustomerService, UtilService],
+  providers: [ProductService,
+    CustomerService,
+    UtilService,
+    [{provide: LocationStrategy, useClass: HashLocationStrategy}]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

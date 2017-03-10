@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { CustomerService } from '../customer.service';
 import { Customer } from '../customer';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-registration',
@@ -24,8 +23,7 @@ export class CustomerRegistrationComponent implements OnInit {
 
 
   constructor(private service: CustomerService,
-    private builder: FormBuilder,
-    private router: Router) { }
+    private builder: FormBuilder) { }
 
   ngOnInit() {
     this.form = this.builder.group({
@@ -46,11 +44,22 @@ export class CustomerRegistrationComponent implements OnInit {
       let customer: Customer = new Customer(this.login.value,
         this.password.value,
         this.email.value);
-      this.success = true;
-      this.fail = false;
+      this.service.createCustomer(customer)
+        .subscribe(
+          (res) => {
+            this.success = true;
+            this.fail = false;
+          },
+          (err) => {
+            this.failText = err;
+            this.fail = true
+          }
+        )
+      
     } else {
       this.fail = true;
-      this.failText = "Failed";
+      this.success = false;
+      this.failText = "Password and confirmation doesn't match";
     }
   }
 
