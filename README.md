@@ -8,3 +8,7 @@
  - mvn install
  - cd eShopFront
  - mvn tomcat7:run-war-only
+
+Server will start at localhost:8080/eShopFront
+
+Backend api will start at localhost:8080/eShopBack

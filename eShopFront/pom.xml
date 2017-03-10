@@ -91,10 +91,6 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://localhost:8081/manager</url>
-                    <server>tomcat8</server>
-                    <username>tomcat</username>
-                    <password>tomcat</password>
                     <webapps>
                         <webapp>
                             <groupId>com.numbedme</groupId>

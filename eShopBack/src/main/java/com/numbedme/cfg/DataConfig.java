@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -29,9 +30,9 @@ public class DataConfig {
     private Environment environment;
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory() {
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource());
+        sessionFactory.setDataSource(dataSource);
         sessionFactory.setPackagesToScan("com.numbedme.app.model");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
@@ -48,7 +49,8 @@ public class DataConfig {
     }
 
     @Bean
-    public DataSource dataSource() {
+    @Profile("dev")
+    public DataSource devDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
         dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
@@ -57,12 +59,13 @@ public class DataConfig {
         return dataSource;
     }
 
-    /*@Bean
-    public DataSource dataSource() {
+    @Bean
+    @Profile("test")
+    public DataSource testDataSource() {
         EmbeddedDatabaseBuilder databaseBuilder = new EmbeddedDatabaseBuilder();
         EmbeddedDatabase db = databaseBuilder.setType(EmbeddedDatabaseType.H2).build();
         return db;
-    }*/
+    }
 
     @Bean
     @Autowired
