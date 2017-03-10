@@ -1,8 +1,10 @@
-To start back:
-  1. mvn tomcat7:run
-  2. Starts up at localhost:8080/eShop
-	
-To start front:
-  1. npm install
-  2. ng serve
-  3. Starts up at localhost:4200
+#eShop web project
+
+##Requierments
+ - Apache Maven: 3.3.9
+ - Java: 1.8.0_101
+
+##Installation
+ - mvn install
+ - cd eShopFront
+ - mvn tomcat7:run-war-only

@@ -28,5 +28,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
                 .allowedHeaders("*");
 
     }
+
+
 }
 
