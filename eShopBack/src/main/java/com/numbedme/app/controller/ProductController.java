@@ -20,36 +20,34 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Product> getProducts(@RequestParam(value = "name", required = false) String pattern) {
-        if (pattern != null){
+        if (pattern != null) {
             return service.findByPattern(pattern);
-        } else{
+        } else {
             return service.findAllProducts();
         }
     }
 
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Product getProduct(@PathVariable("id") int id) {
         return service.findById(id);
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.POST)
-    public void postProduct(@RequestBody() Product product, @PathVariable("id") String id){
-        if (id.equals(product.getId())) {
-            service.persistProduct(product);
-        }
+    @RequestMapping(method = RequestMethod.POST)
+    public void postProduct(@RequestBody() Product product) {
+        service.persistProduct(product);
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
-    public void putProduct(@RequestBody() Product product, @PathVariable("id") String id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public void putProduct(@RequestBody() Product product, @PathVariable("id") String id) {
         if (id.equals(product.getId())) {
             service.updateProduct(product);
         }
     }
 
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    public void deleteProduct(@PathVariable("id") int id){
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteProduct(@PathVariable("id") int id) {
         service.deleteProduct(service.findById(id));
     }
 }

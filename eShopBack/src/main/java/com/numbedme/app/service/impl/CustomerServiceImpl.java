@@ -5,6 +5,7 @@ import com.numbedme.app.repository.CustomerRepository;
 import com.numbedme.app.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by User on 07.03.2017.
  */
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired

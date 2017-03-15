@@ -1,19 +1,19 @@
 package com.numbedme.app.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by User on 06.03.2017.
  */
 @Entity
-public class Customer {
+public class Customer implements Serializable{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    @Lob
-    private String picture;
 
     private String login;
 
@@ -21,21 +21,13 @@ public class Customer {
 
     private String email;
 
-    @ManyToMany
-    private List<Order> orders;
+    @Lob
+    private String picture;
 
-    @OneToMany
-    private List<Product> products;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Order> orders = new HashSet<>();
 
     public Customer() {
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 
     public int getId() {
@@ -70,13 +62,6 @@ public class Customer {
         this.password = password;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
 
     public String getEmail() {
         return email;
@@ -86,36 +71,12 @@ public class Customer {
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Customer customer = (Customer) o;
-
-        if (getId() != customer.getId()) return false;
-        if (getPicture() != null ? !getPicture().equals(customer.getPicture()) : customer.getPicture() != null)
-            return false;
-        if (getLogin() != null ? !getLogin().equals(customer.getLogin()) : customer.getLogin() != null) return false;
-        if (getPassword() != null ? !getPassword().equals(customer.getPassword()) : customer.getPassword() != null)
-            return false;
-        if (getEmail() != null ? !getEmail().equals(customer.getEmail()) : customer.getEmail() != null) return false;
-        if (getOrders() != null ? !getOrders().equals(customer.getOrders()) : customer.getOrders() != null)
-            return false;
-        return getProducts() != null ? getProducts().equals(customer.getProducts()) : customer.getProducts() == null;
-
+    public Set<Order> getOrders() {
+        return orders;
     }
 
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + (getPicture() != null ? getPicture().hashCode() : 0);
-        result = 31 * result + (getLogin() != null ? getLogin().hashCode() : 0);
-        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
-        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
-        result = 31 * result + (getOrders() != null ? getOrders().hashCode() : 0);
-        result = 31 * result + (getProducts() != null ? getProducts().hashCode() : 0);
-        return result;
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     @Override
@@ -127,7 +88,36 @@ public class Customer {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", orders=" + orders +
-                ", products=" + products +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Customer customer = (Customer) o;
+
+        if (getId() != customer.getId()) return false;
+        if (getLogin() != null ? !getLogin().equals(customer.getLogin()) : customer.getLogin() != null) return false;
+        if (getPassword() != null ? !getPassword().equals(customer.getPassword()) : customer.getPassword() != null)
+            return false;
+        if (getEmail() != null ? !getEmail().equals(customer.getEmail()) : customer.getEmail() != null) return false;
+        if (getPicture() != null ? !getPicture().equals(customer.getPicture()) : customer.getPicture() != null)
+            return false;
+        return getOrders() != null ? getOrders().equals(customer.getOrders()) : customer.getOrders() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + (getLogin() != null ? getLogin().hashCode() : 0);
+        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getPicture() != null ? getPicture().hashCode() : 0);
+        result = 31 * result + (getOrders() != null ? getOrders().hashCode() : 0);
+        return result;
     }
 }

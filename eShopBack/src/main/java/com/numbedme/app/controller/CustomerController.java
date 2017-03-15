@@ -4,10 +4,7 @@ import com.numbedme.app.exception.InvalidLoginException;
 import com.numbedme.app.model.Customer;
 import com.numbedme.app.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,7 +24,9 @@ public class CustomerController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void createCustomer(Customer customer){
+    public void createCustomer(@RequestBody Customer customer){
+
+        System.out.println(customer);
 
         if (service.findByLogin(customer.getLogin())!= null){
             throw new InvalidLoginException("Duplicate login " + customer.getLogin());
@@ -37,7 +36,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/{login}",method = RequestMethod.PUT)
-    public void editCustomer(Customer customer, @PathVariable("login") String login){
+    public void editCustomer(@RequestBody Customer customer, @PathVariable("login") String login){
         if (login.equals(customer.getLogin())) {
             service.updateCustomer(customer);
         }

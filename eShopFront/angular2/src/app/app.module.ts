@@ -20,7 +20,7 @@ import { ProductComponent } from './product/product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { ImageComponent } from './image/image.component';
 import { CustomerRegistrationComponent } from './customer-registration/customer-registration.component';
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [

@@ -15,21 +15,6 @@
         <version>0.1</version>
     </parent>
 
-    <properties>
-        <springframework.version>4.2.6.RELEASE</springframework.version>
-        <hibernate.version>4.3.6.Final</hibernate.version>
-        <mysql.connector.version>5.1.31</mysql.connector.version>
-        <joda-time.version>2.3</joda-time.version>
-        <testng.version>6.9.4</testng.version>
-        <mockito.version>1.10.19</mockito.version>
-        <h2.version>1.4.187</h2.version>
-        <dbunit.version>2.2</dbunit.version>
-        <apachetiles.version>3.0.5</apachetiles.version>
-        <dbh2.version>1.4.187</dbh2.version>
-        <hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
-        <validation-api.version>1.1.0.Final</validation-api.version>
-        <jackson.library>2.7.5</jackson.library>
-    </properties>
 
     <dependencies>
         <!-- Spring -->
@@ -85,35 +70,33 @@
             <version>${jackson.library}</version>
         </dependency>
 
-        <!-- Servlet+JSP+JSTL -->
+        <!-- Servlet+JSP -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${javax.servlet}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>2.3.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
+
 
     </dependencies>
 
     <profiles>
         <profile>
             <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+
             <properties>
                 <spring.profiles.active>dev</spring.profiles.active>
+
+                <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+                <jdbc.url>jdbc:mysql://localhost:3306/javawork</jdbc.url>
+                <jdbc.username>root</jdbc.username>
+                <jdbc.password>root</jdbc.password>
+
+                <hibernate.dialect>org.hibernate.dialect.MySQLDialect</hibernate.dialect>
+                <hibernate.show_sql>true</hibernate.show_sql>
+                <hibernate.format_sql>true</hibernate.format_sql>
+                <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
             </properties>
             <dependencies>
                 <!-- MySQL -->
@@ -126,8 +109,16 @@
         </profile>
         <profile>
             <id>test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <spring.profiles.active>test</spring.profiles.active>
+
+                <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+                <hibernate.show_sql>true</hibernate.show_sql>
+                <hibernate.format_sql>true</hibernate.format_sql>
+                <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
             </properties>
 
             <dependencies>
@@ -152,7 +143,6 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
                 <executions>
                     <execution>
                         <id>deploy to tomcat</id>

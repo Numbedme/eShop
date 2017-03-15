@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by User on 15.02.2017.
@@ -33,19 +34,7 @@ public class Product implements Serializable {
     private String description;
 
     @Lob
-    @Basic(fetch = FetchType.LAZY)
     private String picture;
-
-    @ManyToOne
-    private Customer customer;
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public String getPicture() {
         return picture;
@@ -96,6 +85,18 @@ public class Product implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", startDate=" + startDate +
+                ", description='" + description + '\'' +
+                ", picture='" + picture + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -109,12 +110,8 @@ public class Product implements Serializable {
             return false;
         if (getDescription() != null ? !getDescription().equals(product.getDescription()) : product.getDescription() != null)
             return false;
-        if (getPicture() != null ? !getPicture().equals(product.getPicture()) : product.getPicture() != null)
-            return false;
-        if (getCustomer() != null ? !getCustomer().equals(product.getCustomer()) : product.getCustomer() != null)
-            return false;
+        return getPicture() != null ? getPicture().equals(product.getPicture()) : product.getPicture() == null;
 
-        return true;
     }
 
     @Override
@@ -125,20 +122,6 @@ public class Product implements Serializable {
         result = 31 * result + (getStartDate() != null ? getStartDate().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
         result = 31 * result + (getPicture() != null ? getPicture().hashCode() : 0);
-        result = 31 * result + (getCustomer() != null ? getCustomer().hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", startDate=" + startDate +
-                ", description='" + description + '\'' +
-                ", picture='" + picture + '\'' +
-                ", customer=" + customer +
-                '}';
     }
 }

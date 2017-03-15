@@ -20,7 +20,7 @@ export class ProductService {
   }
 
   saveProduct(product:Product):Observable<any>{
-    return this.http.post(this.url + '/' + product.id, product);
+    return this.http.post(this.url + '/', product);
   }
 
   deleteProduct(id:number):Observable<any>{

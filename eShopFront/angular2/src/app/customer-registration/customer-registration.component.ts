@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { CustomerService } from '../customer.service';
-import { Customer } from '../customer';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
+import {CustomerService} from '../customer.service';
+import {Customer} from '../customer';
 
 @Component({
   selector: 'app-customer-registration',
@@ -10,20 +10,21 @@ import { Customer } from '../customer';
 })
 export class CustomerRegistrationComponent implements OnInit {
 
-  private form: FormGroup;
+  private form:FormGroup;
 
-  private login: AbstractControl;
-  private password: AbstractControl;
-  private confirm: AbstractControl;
-  private email: AbstractControl;
+  private login:AbstractControl;
+  private password:AbstractControl;
+  private confirm:AbstractControl;
+  private email:AbstractControl;
 
-  private success: boolean = false;
-  private fail: boolean = false;
-  private failText: string;
+  private success:boolean = false;
+  private fail:boolean = false;
+  private failText:string;
 
 
-  constructor(private service: CustomerService,
-    private builder: FormBuilder) { }
+  constructor(private service:CustomerService,
+              private builder:FormBuilder) {
+  }
 
   ngOnInit() {
     this.form = this.builder.group({
@@ -39,28 +40,37 @@ export class CustomerRegistrationComponent implements OnInit {
     this.email = this.form.controls['email'];
   }
 
-  onSubmit(): void {
+  onSubmit():void {
     if (this.password.value === this.confirm.value) {
-      let customer: Customer = new Customer(this.login.value,
+      let customer:Customer = new Customer(this.login.value,
         this.password.value,
         this.email.value);
       this.service.createCustomer(customer)
         .subscribe(
           (res) => {
-            this.success = true;
-            this.fail = false;
+            this.setSuccess();
           },
           (err) => {
-            this.failText = err;
-            this.fail = true
+            console.log(err);
+            this.setFail(err);
           }
         )
-      
+
     } else {
-      this.fail = true;
-      this.success = false;
-      this.failText = "Password and confirmation doesn't match";
+      this.setFail("Password and confirmation doesn't match");
     }
   }
+
+  setSuccess():void {
+    this.success = true;
+    this.fail = false;
+  }
+
+  setFail(text:string):void {
+    this.success = false;
+    this.fail = true;
+    this.failText = text;
+  }
+
 
 }
