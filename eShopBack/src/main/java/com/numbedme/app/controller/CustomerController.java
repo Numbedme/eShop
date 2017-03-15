@@ -1,6 +1,7 @@
 package com.numbedme.app.controller;
 
 import com.numbedme.app.exception.InvalidLoginException;
+import com.numbedme.app.exception.NotExistingCustomerException;
 import com.numbedme.app.model.Customer;
 import com.numbedme.app.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,12 @@ public class CustomerController {
 
     @RequestMapping(value = "/{login}",method = RequestMethod.GET)
     public Customer getCustomerByLogin(@PathVariable("login") String login){
-        return service.findByLogin(login);
+        Customer customer = service.findByLogin(login);
+        if (customer == null){
+            throw new NotExistingCustomerException("Customer doesn't exist");
+        } else {
+            return customer;
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST)

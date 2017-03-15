@@ -21,6 +21,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { ImageComponent } from './image/image.component';
 import { CustomerRegistrationComponent } from './customer-registration/customer-registration.component';
 import { LoginComponent } from './login/login.component';
+import {AuthService} from "./auth.service";
+import {LoggedInGuardService} from "./logged-in-guard.service";
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { LoginComponent } from './login/login.component';
   providers: [ProductService,
     CustomerService,
     UtilService,
+    AuthService,
+    LoggedInGuardService,
     [{provide: LocationStrategy, useClass: HashLocationStrategy}]],
   bootstrap: [AppComponent]
 })

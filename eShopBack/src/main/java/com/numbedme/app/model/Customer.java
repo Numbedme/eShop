@@ -27,6 +27,9 @@ public class Customer implements Serializable{
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Order> orders = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<LineItem> products = new HashSet<>();
+
     public Customer() {
     }
 
@@ -79,21 +82,16 @@ public class Customer implements Serializable{
         this.orders = orders;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", picture='" + picture + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", orders=" + orders +
-                '}';
+    public Set<LineItem> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<LineItem> products) {
+        this.products = products;
     }
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -106,7 +104,9 @@ public class Customer implements Serializable{
         if (getEmail() != null ? !getEmail().equals(customer.getEmail()) : customer.getEmail() != null) return false;
         if (getPicture() != null ? !getPicture().equals(customer.getPicture()) : customer.getPicture() != null)
             return false;
-        return getOrders() != null ? getOrders().equals(customer.getOrders()) : customer.getOrders() == null;
+        if (getOrders() != null ? !getOrders().equals(customer.getOrders()) : customer.getOrders() != null)
+            return false;
+        return getProducts() != null ? getProducts().equals(customer.getProducts()) : customer.getProducts() == null;
 
     }
 
@@ -118,6 +118,21 @@ public class Customer implements Serializable{
         result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
         result = 31 * result + (getPicture() != null ? getPicture().hashCode() : 0);
         result = 31 * result + (getOrders() != null ? getOrders().hashCode() : 0);
+        result = 31 * result + (getProducts() != null ? getProducts().hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", picture='" + picture + '\'' +
+                ", orders=" + orders +
+                ", products=" + products +
+                '}';
+    }
+
 }

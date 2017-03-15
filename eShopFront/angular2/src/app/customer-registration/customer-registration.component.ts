@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import {CustomerService} from '../customer.service';
 import {Customer} from '../customer';
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-customer-registration',
@@ -23,7 +24,8 @@ export class CustomerRegistrationComponent implements OnInit {
 
 
   constructor(private service:CustomerService,
-              private builder:FormBuilder) {
+              private builder:FormBuilder,
+              private auth:AuthService) {
   }
 
   ngOnInit() {
@@ -42,17 +44,21 @@ export class CustomerRegistrationComponent implements OnInit {
 
   onSubmit():void {
     if (this.password.value === this.confirm.value) {
+
+      let pass:string = this.auth.encrypt(this.password.value);
+
       let customer:Customer = new Customer(this.login.value,
-        this.password.value,
-        this.email.value);
+                                           pass,
+                                           this.email.value);
       this.service.createCustomer(customer)
         .subscribe(
           (res) => {
             this.setSuccess();
           },
           (err) => {
-            console.log(err);
-            this.setFail(err);
+            if (err.status == 406){
+              this.setFail("User with login "+ customer.login + " already exist");
+            } else console.log(err);
           }
         )
 

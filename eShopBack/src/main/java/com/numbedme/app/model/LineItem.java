@@ -19,6 +19,9 @@ public class LineItem implements Serializable {
     @OneToOne
     private Product product;
 
+    @ManyToOne
+    private Customer customer;
+
     public int getId() {
         return id;
     }
