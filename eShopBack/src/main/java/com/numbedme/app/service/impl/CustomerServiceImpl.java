@@ -3,6 +3,7 @@ package com.numbedme.app.service.impl;
 import com.numbedme.app.model.Customer;
 import com.numbedme.app.repository.CustomerRepository;
 import com.numbedme.app.service.CustomerService;
+import com.numbedme.app.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository repository;
+
+    @Autowired
+    private MessageService messageService;
 
     @Override
     public Customer findById(int id) {
@@ -42,6 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void persistCustomer(Customer customer) {
         repository.persistCustomer(customer);
+        messageService.sendMessage(customer.getEmail(), "test@gmail.com", "Hey", "You are in");
     }
 
     @Override

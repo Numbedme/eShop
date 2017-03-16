@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
   setFail(text:string):void{
     this.fail = true;
-    this.success = true;
+    this.success = false;
     this.failText = text;
   }
 

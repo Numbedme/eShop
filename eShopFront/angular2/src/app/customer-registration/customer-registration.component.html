@@ -12,24 +12,49 @@
       <form class="form" [formGroup]="form">
         <div class="form-group">
           <label for="login">Login: </label>
-          <input type="text" id="login" class="form-control" placeholder="Login..." [formControl]="login">
+          <div class="has-feedback" [class.has-error]="!login.valid && login.dirty"
+               [class.has-success]="login.valid && login.dirty">
+            <input type="text" id="login" class="form-control" placeholder="Login..." [formControl]="login">
+            <span *ngIf="login.valid && login.dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span *ngIf="!login.valid && login.dirty" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
         </div>
         <div class="form-group">
           <label for="password">Password: </label>
-          <input type="password" id="password" class="form-control" placeholder="Password..." [formControl]="password">
+          <div class="has-feedback" [class.has-error]="!password.valid && password.dirty"
+               [class.has-success]="password.valid && password.dirty">
+            <input type="password" id="password" class="form-control" placeholder="Password..."
+                   [formControl]="password">
+            <span *ngIf="password.valid && password.dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span *ngIf="!password.valid && password.dirty"
+                  class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
         </div>
         <div class="form-group">
           <label for="passwordConf">Confirm password: </label>
-          <input type="password" id="passwordConf" class="form-control" placeholder="Confirmation..."
-                 [formControl]="confirm">
+          <div class="has-feedback" [class.has-error]="!confirm.valid && confirm.dirty"
+               [class.has-success]="confirm.valid && confirm.dirty">
+            <input type="password" id="passwordConf" class="form-control" placeholder="Confirmation..."
+                   [formControl]="confirm">
+            <span *ngIf="confirm.valid && confirm.dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span *ngIf="!confirm.valid && confirm.dirty"
+                  class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
         </div>
         <div class="form-group">
           <label for="email">Email: </label>
+          <div class="has-feedback" [class.has-error]="!email.valid && email.dirty"
+               [class.has-success]="email.valid && email.dirty">
           <input type="text" id="email" class="form-control" placeholder="Email..." [formControl]="email">
+          <span *ngIf="email.valid && email.dirty" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span *ngIf="!email.valid && email.dirty"
+                  class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
         </div>
         <br/>
         <div class="form-group">
-          <input type="button" (click)="onSubmit()" class="btn btn-accept pull-right" [disabled]="!form.valid" value="Register">
+          <input type="button" (click)="onSubmit()" class="btn btn-accept pull-right" [disabled]="!form.valid"
+                 value="Register">
         </div>
       </form>
     </div>
