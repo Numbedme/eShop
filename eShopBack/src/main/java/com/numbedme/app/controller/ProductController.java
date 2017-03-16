@@ -11,7 +11,7 @@ import java.util.List;
  * Created by User on 17.02.2017.
  */
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @RequestMapping("/products")
 public class ProductController {
 
@@ -40,7 +40,10 @@ public class ProductController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public void putProduct(@RequestBody() Product product, @PathVariable("id") String id) {
-        if (id.equals(product.getId())) {
+        System.out.println(id.equals(product.getId()));
+        System.out.println(id + " " + product.getId());
+        if (id.equals(product.getId().toString())) {
+
             service.updateProduct(product);
         }
     }

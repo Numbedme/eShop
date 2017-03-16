@@ -23,6 +23,7 @@ import { CustomerRegistrationComponent } from './customer-registration/customer-
 import { LoginComponent } from './login/login.component';
 import {AuthService} from "./auth.service";
 import {LoggedInGuardService} from "./logged-in-guard.service";
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {LoggedInGuardService} from "./logged-in-guard.service";
     ImageComponent,
     CustomerRegistrationComponent,
     LoginComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

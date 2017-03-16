@@ -5,6 +5,7 @@
 **/tmp/
 **/temp/
 **/target/
+**/work/
 
 # dependencies
 **/node_modules/

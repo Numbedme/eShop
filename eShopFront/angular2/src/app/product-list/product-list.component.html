@@ -1,5 +1,20 @@
-<div *ngIf="products">
-  <div *ngFor="let product of products">
-    <app-product [product]="product" (delete)="deleteProduct($event)" (edit)="editProduct($event)"></app-product>
+<div class="container">
+  <div class="jumbotron">
+    <h1>Hello, world!</h1>
+    <p>Welcome to a brand new eShop</p>
+    <p><a class="btn btn-primary btn-lg" routerLink="/about" role="button">Learn more</a></p>
   </div>
+  <div *ngIf="!products || products.length === 0">
+    <div class="alert alert-warning" role="alert">
+      Oops! No products yet. Be the first one to <a routerLink="/create">create</a>
+    </div>
+  </div>
+
+  <div *ngIf="products">
+    <div *ngFor="let product of products">
+      <app-product [product]="product" (delete)="deleteProduct($event)" (edit)="editProduct($event)"></app-product>
+    </div>
+  </div>
+
 </div>
+

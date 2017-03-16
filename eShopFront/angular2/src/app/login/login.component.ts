@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
         login: ['', Validators.required],
         password: ['', Validators.required]
       });
-
     this.login = this.form.controls['login'];
     this.password = this.form.controls['password'];
   }

@@ -49,7 +49,8 @@ export class EditProductComponent implements OnInit {
 
   onChange(event) {
     let file: File = event.target.files[0];
-    if (file) {
+    console.log(file.type);
+    if (file && file.type.startsWith("image")) {
       let fr: FileReader = new FileReader();
       fr.onloadend = (e) => {
         this.pic = fr.result;
@@ -63,13 +64,17 @@ export class EditProductComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.pic.startsWith("data:image")) {
-      let product: Product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, this.pic);
+    let product:Product;
+    if (this.pic === null){
+      product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, null);
+    } else if (this.pic.startsWith("data:image")) {
+      product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, this.pic);
+    }
       product.id = this.product.id;
       this.service.updateProduct(product).subscribe(
         res => console.log(res)
       );
-    }
+
 
   }
 
