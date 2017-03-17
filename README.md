@@ -5,7 +5,12 @@
  - Java: 1.8.0_101
 
 ## Installation
- - mvn install (will start the app)
+ - Create file email.properties in eShopBack folder an fill it with props:
+    - smtp.host
+    - smtp.port
+    - smtp.username
+    - smtp.password
+ - Run "mvn install" at the root folder (will start the app)
 
 Server will start at localhost:8080/eShopFront
 

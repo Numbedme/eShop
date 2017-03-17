@@ -40,10 +40,7 @@ public class ProductController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public void putProduct(@RequestBody() Product product, @PathVariable("id") String id) {
-        System.out.println(id.equals(product.getId()));
-        System.out.println(id + " " + product.getId());
         if (id.equals(product.getId().toString())) {
-
             service.updateProduct(product);
         }
     }
