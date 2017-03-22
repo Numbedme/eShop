@@ -1,5 +1,6 @@
 package com.numbedme.cfg;
 
+import org.h2.tools.Server;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,7 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.Properties;
 
 /**
@@ -36,6 +38,18 @@ public class DataConfig {
         sessionFactory.setPackagesToScan("com.numbedme.app.model");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
+    }
+
+    @Bean(initMethod = "start", destroyMethod = "stop")
+    @Profile("test")
+    public Server getH2WebServer() throws SQLException {
+        return Server.createWebServer();
+    }
+
+    @Bean(initMethod = "start", destroyMethod = "stop")
+    @Profile("test")
+    public Server getH2Server() throws SQLException {
+        return Server.createTcpServer();
     }
 
     @Bean

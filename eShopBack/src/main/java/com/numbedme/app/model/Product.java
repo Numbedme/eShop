@@ -1,13 +1,7 @@
 package com.numbedme.app.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Set;
 
@@ -26,15 +20,81 @@ public class Product implements Serializable {
 
     private Double price;
 
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Customer customer;
+
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private Set<Comment> comments;
 
     @Lob
     private String description;
 
     @Lob
     private String picture;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (id != null ? !id.equals(product.id) : product.id != null) return false;
+        if (name != null ? !name.equals(product.name) : product.name != null) return false;
+        if (price != null ? !price.equals(product.price) : product.price != null) return false;
+        if (startDate != null ? !startDate.equals(product.startDate) : product.startDate != null) return false;
+        if (customer != null ? !customer.equals(product.customer) : product.customer != null) return false;
+        if (comments != null ? !comments.equals(product.comments) : product.comments != null) return false;
+        if (description != null ? !description.equals(product.description) : product.description != null) return false;
+        return picture != null ? picture.equals(product.picture) : product.picture == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        result = 31 * result + (customer != null ? customer.hashCode() : 0);
+        result = 31 * result + (comments != null ? comments.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        return result;
+    }
+
+    public Set<Comment> getComments() {
+
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", startDate=" + startDate +
+                ", customer=" + customer +
+                ", comments=" + comments +
+                ", description='" + description + '\'' +
+                ", picture='" + picture + '\'' +
+                '}';
+    }
 
     public String getPicture() {
         return picture;
@@ -84,44 +144,4 @@ public class Product implements Serializable {
         this.startDate = startDate;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", startDate=" + startDate +
-                ", description='" + description + '\'' +
-                ", picture='" + picture + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Product product = (Product) o;
-
-        if (getId() != null ? !getId().equals(product.getId()) : product.getId() != null) return false;
-        if (getName() != null ? !getName().equals(product.getName()) : product.getName() != null) return false;
-        if (getPrice() != null ? !getPrice().equals(product.getPrice()) : product.getPrice() != null) return false;
-        if (getStartDate() != null ? !getStartDate().equals(product.getStartDate()) : product.getStartDate() != null)
-            return false;
-        if (getDescription() != null ? !getDescription().equals(product.getDescription()) : product.getDescription() != null)
-            return false;
-        return getPicture() != null ? getPicture().equals(product.getPicture()) : product.getPicture() == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
-        result = 31 * result + (getStartDate() != null ? getStartDate().hashCode() : 0);
-        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + (getPicture() != null ? getPicture().hashCode() : 0);
-        return result;
-    }
 }

@@ -13,7 +13,7 @@ public class Customer implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     private String login;
 
@@ -25,10 +25,10 @@ public class Customer implements Serializable{
     private String picture;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Order> orders = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<LineItem> products = new HashSet<>();
+    private Set<Comment> comments;
 
     public Customer() {
     }
@@ -74,22 +74,6 @@ public class Customer implements Serializable{
         this.email = email;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
-
-    public Set<LineItem> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<LineItem> products) {
-        this.products = products;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,28 +81,22 @@ public class Customer implements Serializable{
 
         Customer customer = (Customer) o;
 
-        if (getId() != customer.getId()) return false;
-        if (getLogin() != null ? !getLogin().equals(customer.getLogin()) : customer.getLogin() != null) return false;
-        if (getPassword() != null ? !getPassword().equals(customer.getPassword()) : customer.getPassword() != null)
-            return false;
-        if (getEmail() != null ? !getEmail().equals(customer.getEmail()) : customer.getEmail() != null) return false;
-        if (getPicture() != null ? !getPicture().equals(customer.getPicture()) : customer.getPicture() != null)
-            return false;
-        if (getOrders() != null ? !getOrders().equals(customer.getOrders()) : customer.getOrders() != null)
-            return false;
-        return getProducts() != null ? getProducts().equals(customer.getProducts()) : customer.getProducts() == null;
-
+        if (id != customer.id) return false;
+        if (login != null ? !login.equals(customer.login) : customer.login != null) return false;
+        if (password != null ? !password.equals(customer.password) : customer.password != null) return false;
+        if (email != null ? !email.equals(customer.email) : customer.email != null) return false;
+        if (picture != null ? !picture.equals(customer.picture) : customer.picture != null) return false;
+        return products != null ? products.equals(customer.products) : customer.products == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getId();
-        result = 31 * result + (getLogin() != null ? getLogin().hashCode() : 0);
-        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
-        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
-        result = 31 * result + (getPicture() != null ? getPicture().hashCode() : 0);
-        result = 31 * result + (getOrders() != null ? getOrders().hashCode() : 0);
-        result = 31 * result + (getProducts() != null ? getProducts().hashCode() : 0);
+        int result = id;
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (picture != null ? picture.hashCode() : 0);
+        result = 31 * result + (products != null ? products.hashCode() : 0);
         return result;
     }
 
@@ -130,9 +108,16 @@ public class Customer implements Serializable{
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", picture='" + picture + '\'' +
-                ", orders=" + orders +
                 ", products=" + products +
                 '}';
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
 }
