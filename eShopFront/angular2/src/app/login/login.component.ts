@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           if (this.auth.checkPasswords(customer.password, this.password.value)){
             this.auth.login(customer);
             this.setSuccess("Logged in as " + customer.login)
-            setTimeout((res) => this.router.navigate(['/home']),3000)
+            setTimeout((res) => this.router.navigate(['/home']),300)
           } else {
             this.setFail('Unable to login')
           }

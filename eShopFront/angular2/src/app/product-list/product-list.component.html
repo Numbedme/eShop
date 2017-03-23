@@ -12,7 +12,7 @@
 
   <div *ngIf="products">
     <div *ngFor="let product of products">
-      <app-product [product]="product" (delete)="deleteProduct($event)" (edit)="editProduct($event)"></app-product>
+      <app-product [product]="product"></app-product>
     </div>
   </div>
 

@@ -27,7 +27,6 @@ export class EditProductComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //noinspection TypeScriptValidateTypes
     this.route.params
       .switchMap((params) => this.service.getProduct(+params['id']))
       .subscribe((product: Product) => {

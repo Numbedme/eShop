@@ -7,6 +7,8 @@ import {ProductCreatorComponent} from './product-creator/product-creator.compone
 import {CustomerRegistrationComponent} from './customer-registration/customer-registration.component';
 import {LoggedInGuardService} from "./logged-in-guard.service";
 import {AboutComponent} from "./about/about.component";
+import {AccountComponent} from "./account/account.component";
+import {ProductDetailsComponent} from "./product-details/product-details.component";
 export const appRoutes:Routes = [
     {
       path: '',
@@ -42,6 +44,15 @@ export const appRoutes:Routes = [
     {
       path: 'about',
       component: AboutComponent
+    },
+    {
+      path:'account',
+      component: AccountComponent,
+      canActivate: [LoggedInGuardService]
+    },
+    {
+      path:'details/:id',
+      component:ProductDetailsComponent
     }
   ]
   ;

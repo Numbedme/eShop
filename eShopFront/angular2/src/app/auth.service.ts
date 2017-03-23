@@ -8,8 +8,15 @@ import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AuthService {
+  get customer(): Customer {
+    return this._customer;
+  }
 
-  private customer:Customer = null;
+  set customer(value: Customer) {
+    this._customer = value;
+  }
+
+  private _customer:Customer = null;
 
   private loginAnnouncedSource:Subject<boolean> = new Subject<boolean>();
 
@@ -23,18 +30,18 @@ export class AuthService {
   }
 
   login(customer:Customer):void{
-    this.customer = customer;
+    this._customer = customer;
     let authKey = this.encrypt(this.encrypt(customer.login) + '??' + this.encrypt(customer.password));
     Cookie.set('authKey', authKey);
     this.loginAnnouncedSource.next(true);
   }
 
   isLoggedIn():boolean{
-    return !(this.customer === null);
+    return !(this._customer === null);
   }
 
   logOut():void{
-    this.customer = null;
+    this._customer = null;
     Cookie.delete('authKey');
     this.loginAnnouncedSource.next(false);
   }

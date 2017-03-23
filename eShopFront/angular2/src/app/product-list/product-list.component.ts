@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { ProductService } from '../product.service'
 
@@ -17,7 +17,6 @@ export class ProductListComponent implements OnInit {
   private search: boolean;
 
   constructor(private service: ProductService,
-    private router: Router,
     private route: ActivatedRoute) {
   }
 
@@ -29,13 +28,6 @@ export class ProductListComponent implements OnInit {
       }
       this.refreshProductList();
     });
-  }
-
-  deleteProduct(id: number): void {
-    this.service.deleteProduct(id)
-      .subscribe(
-      res => this.refreshProductList()
-      );
   }
 
   refreshProductList(): void {
@@ -52,11 +44,5 @@ export class ProductListComponent implements OnInit {
         }
       );
     }
-
   }
-
-  editProduct(id: number): void {
-    this.router.navigate(['/edit', id]);
-  }
-
 }

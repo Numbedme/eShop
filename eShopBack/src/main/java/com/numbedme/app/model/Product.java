@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by User on 15.02.2017.
@@ -27,7 +25,6 @@ public class Product implements Serializable {
     private Date startDate;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonIgnore
     private Customer customer;
 
     @Lob

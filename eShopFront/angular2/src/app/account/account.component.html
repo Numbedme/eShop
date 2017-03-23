@@ -1,3 +1,25 @@
-<p>
-  account works!
-</p>
+<div class="container">
+  <h1 class="page-header">Welcome {{customer.login}}</h1>
+  <h3 class="text-info">
+    Here you can manage your account
+  </h3>
+  <app-customer-info [customer]="customer"></app-customer-info>
+  <app-customer-edit [customer]="customer"></app-customer-edit>
+  <div *ngIf="!customer.products || customer.products.length === 0">
+    <div class="alert alert-warning" role="alert">
+      <p>
+        You don't have any products to sell yet, but you always can start selling
+      </p>
+      <p>
+        Create your advertisement <a routerLink="/create">now</a>
+      </p>
+    </div>
+  </div>
+
+  <div *ngIf="customer.products">
+    <h1 class="modal-header">Here is a list of your products</h1>
+    <div *ngFor="let product of customer.products">
+      <app-product [product]="product"></app-product>
+    </div>
+  </div>
+</div>
