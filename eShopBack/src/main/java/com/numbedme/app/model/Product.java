@@ -1,8 +1,11 @@
 package com.numbedme.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,11 +26,9 @@ public class Product implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Customer customer;
-
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private Set<Comment> comments;
 
     @Lob
     private String description;
@@ -47,7 +48,6 @@ public class Product implements Serializable {
         if (price != null ? !price.equals(product.price) : product.price != null) return false;
         if (startDate != null ? !startDate.equals(product.startDate) : product.startDate != null) return false;
         if (customer != null ? !customer.equals(product.customer) : product.customer != null) return false;
-        if (comments != null ? !comments.equals(product.comments) : product.comments != null) return false;
         if (description != null ? !description.equals(product.description) : product.description != null) return false;
         return picture != null ? picture.equals(product.picture) : product.picture == null;
     }
@@ -59,19 +59,9 @@ public class Product implements Serializable {
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         result = 31 * result + (customer != null ? customer.hashCode() : 0);
-        result = 31 * result + (comments != null ? comments.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (picture != null ? picture.hashCode() : 0);
         return result;
-    }
-
-    public Set<Comment> getComments() {
-
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
     }
 
     public Customer getCustomer() {
@@ -90,7 +80,6 @@ public class Product implements Serializable {
                 ", price=" + price +
                 ", startDate=" + startDate +
                 ", customer=" + customer +
-                ", comments=" + comments +
                 ", description='" + description + '\'' +
                 ", picture='" + picture + '\'' +
                 '}';

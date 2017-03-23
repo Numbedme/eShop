@@ -16,4 +16,4 @@
 
 1. Server will start at localhost:8080/eShopFront
 2. Backend api will start at localhost:8080/eShopBack
-3. You can access embedded H2 db console at localhost:8082. Enter jdbc:h2:mem:testdb in url.
+3. You can access embedded H2Server at localhost:8082. Enter jdbc:h2:mem:testdb in url.

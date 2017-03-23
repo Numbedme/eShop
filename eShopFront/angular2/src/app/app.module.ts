@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import {AuthService} from "./auth.service";
 import {LoggedInGuardService} from "./logged-in-guard.service";
 import { AboutComponent } from './about/about.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AboutComponent } from './about/about.component';
     CustomerRegistrationComponent,
     LoginComponent,
     AboutComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

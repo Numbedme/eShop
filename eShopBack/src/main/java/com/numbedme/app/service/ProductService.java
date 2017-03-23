@@ -1,5 +1,6 @@
 package com.numbedme.app.service;
 
+import com.numbedme.app.model.Customer;
 import com.numbedme.app.model.Product;
 import org.springframework.stereotype.Service;
 
@@ -22,4 +23,6 @@ public interface ProductService {
     List<Product> findAllProducts();
 
     List<Product> findByPattern(String pattern);
+
+    List<Product> findCustomerProducts(Customer byId);
 }

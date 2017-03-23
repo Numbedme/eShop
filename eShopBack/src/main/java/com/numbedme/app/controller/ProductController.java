@@ -1,6 +1,7 @@
 package com.numbedme.app.controller;
 
 import com.numbedme.app.model.Product;
+import com.numbedme.app.service.CustomerService;
 import com.numbedme.app.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,9 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
+    @Autowired
+    private CustomerService customerService;
+
     @RequestMapping(method = RequestMethod.GET)
     public List<Product> getProducts(@RequestParam(value = "name", required = false) String pattern) {
         if (pattern != null) {
@@ -25,6 +29,11 @@ public class ProductController {
         } else {
             return service.findAllProducts();
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/customer/{id}")
+    public List<Product> getProductsOfCustomer(@PathVariable("id") int id){
+        return service.findCustomerProducts(customerService.findById(id));
     }
 
 

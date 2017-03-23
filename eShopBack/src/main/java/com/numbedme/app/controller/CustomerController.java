@@ -38,7 +38,7 @@ public class CustomerController {
             throw new InvalidLoginException("Duplicate login " + customer.getLogin());
         }
 
-        service.persistCustomer(customer);
+        service.registerCustomer(customer);
     }
 
     @RequestMapping(value = "/{login}",method = RequestMethod.PUT)

@@ -66,8 +66,7 @@
                                     <goal>install-node-and-npm</goal>
                                 </goals>
                                 <configuration>
-                                    <nodeVersion>v6.3.1</nodeVersion>
-                                    <npmVersion>3.9.5</npmVersion>
+                                    <nodeVersion>v7.7.4</nodeVersion>
                                 </configuration>
                             </execution>
                             <!-- It will execute command "npm install" inside "/angular2" directory -->

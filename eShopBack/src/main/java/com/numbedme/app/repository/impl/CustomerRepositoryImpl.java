@@ -40,7 +40,7 @@ public class CustomerRepositoryImpl extends AbstractRepository<Integer, Customer
     }
 
     @Override
-    public void persistCustomer(Customer customer) {
+    public void registerCustomer(Customer customer) {
         persist(customer);
     }
 

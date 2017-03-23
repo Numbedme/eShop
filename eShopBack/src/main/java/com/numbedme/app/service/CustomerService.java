@@ -16,7 +16,7 @@ public interface CustomerService {
 
     void deleteCustomer(Customer customer);
 
-    void persistCustomer(Customer customer);
+    void registerCustomer(Customer customer);
 
     List<Customer> findAllCustomers();
 }

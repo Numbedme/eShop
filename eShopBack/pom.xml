@@ -94,6 +94,12 @@
             <version>LATEST</version>
         </dependency>
 
+        <dependency>
+            <!-- H2 DB -->
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${dbh2.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -134,17 +140,8 @@
                 <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
                 <hibernate.show_sql>true</hibernate.show_sql>
                 <hibernate.format_sql>true</hibernate.format_sql>
-                <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+                <hibernate.hbm2ddl.auto>create</hibernate.hbm2ddl.auto>
             </properties>
-
-            <dependencies>
-                <dependency>
-                    <!-- H2 DB -->
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                    <version>${dbh2.version}</version>
-                </dependency>
-            </dependencies>
         </profile>
     </profiles>
 

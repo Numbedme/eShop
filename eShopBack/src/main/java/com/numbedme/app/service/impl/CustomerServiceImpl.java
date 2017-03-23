@@ -44,8 +44,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void persistCustomer(Customer customer) {
-        repository.persistCustomer(customer);
+    public void registerCustomer(Customer customer) {
+        repository.registerCustomer(customer);
         try {
             messageService.sendMessage(customer.getEmail(), "test@gmail.com", "Hello form eShop!", "Welcome to our site, now you can add products or buy something from others.");
         }catch (Exception e){
