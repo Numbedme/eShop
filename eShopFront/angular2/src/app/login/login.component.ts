@@ -14,10 +14,12 @@ export class LoginComponent implements OnInit {
 
   private login: AbstractControl;
   private password:AbstractControl;
+
   private form: FormGroup;
 
   private fail:boolean = false;
   private success:boolean = false;
+  private checkRemember:boolean = false;
   private failText:string;
   private successText:string;
 
@@ -41,7 +43,10 @@ export class LoginComponent implements OnInit {
         (customer:Customer)=> {
           if (this.auth.checkPasswords(customer.password, this.password.value)){
             this.auth.login(customer);
-            this.setSuccess("Logged in as " + customer.login)
+            if (this.checkRemember){
+              this.auth.addCustomerCookie();
+            }
+            this.setSuccess("Logged in as " + customer.login);
             setTimeout((res) => this.router.navigate(['/home']),300)
           } else {
             this.setFail('Unable to login')
@@ -52,6 +57,10 @@ export class LoginComponent implements OnInit {
           this.setFail(err);
         }
       )
+  }
+
+  toggleRemember():void{
+    this.checkRemember = !this.checkRemember;
   }
 
   setFail(text:string):void{

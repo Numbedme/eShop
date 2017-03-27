@@ -3,25 +3,26 @@ import {Routes} from '@angular/router';
 import {ProductListComponent} from './product-list/product-list.component';
 import {LoginComponent} from './login/login.component';
 import {EditProductComponent} from './edit-product/edit-product.component';
-import {ProductCreatorComponent} from './product-creator/product-creator.component';
 import {CustomerRegistrationComponent} from './customer-registration/customer-registration.component';
 import {LoggedInGuardService} from "./logged-in-guard.service";
 import {AboutComponent} from "./about/about.component";
 import {AccountComponent} from "./account/account.component";
 import {ProductDetailsComponent} from "./product-details/product-details.component";
+import {AuthenticatedGuardService} from "./authenticated-guard.service";
 export const appRoutes:Routes = [
     {
       path: '',
       redirectTo: 'home',
-      pathMatch: 'full'
+      pathMatch: 'full',
+
     },
     {
       path: "home",
-      component: ProductListComponent
+      component: ProductListComponent,
     },
     {
       path: 'create',
-      component: ProductCreatorComponent,
+      component: EditProductComponent,
       canActivate: [LoggedInGuardService]
     },
     {
@@ -31,19 +32,21 @@ export const appRoutes:Routes = [
     },
     {
       path: 'search/:pattern',
-      component: ProductListComponent
+      component: ProductListComponent,
     },
     {
       path: 'register',
-      component: CustomerRegistrationComponent
+      component: CustomerRegistrationComponent,
+      canActivate: [AuthenticatedGuardService]
     },
     {
       path: 'login',
-      component: LoginComponent
+      component: LoginComponent,
+      canActivate: [AuthenticatedGuardService]
     },
     {
       path: 'about',
-      component: AboutComponent
+      component: AboutComponent,
     },
     {
       path:'account',
@@ -52,7 +55,7 @@ export const appRoutes:Routes = [
     },
     {
       path:'details/:id',
-      component:ProductDetailsComponent
+      component:ProductDetailsComponent,
     }
   ]
   ;

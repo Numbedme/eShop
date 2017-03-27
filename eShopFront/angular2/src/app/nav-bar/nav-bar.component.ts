@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import {AuthService} from "../auth.service";
 
 @Component({
@@ -18,7 +18,6 @@ export class NavBarComponent implements OnInit {
     this.auth.loginAnnounced.subscribe((logged:boolean) => {
       this.logged = logged
     });
-    
   }
 
   onSubmit(search:string):void{
@@ -26,7 +25,6 @@ export class NavBarComponent implements OnInit {
   }
 
   logout():void{
-    console.log('out')
     this.auth.logOut();
   }
 

@@ -11,7 +11,6 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductListComponent } from './product-list/product-list.component';
 
 import {appRoutes} from './app.routing';
-import { ProductCreatorComponent } from './product-creator/product-creator.component';
 
 import {ProductService} from './product.service';
 import {UtilService} from './util.service';
@@ -28,6 +27,7 @@ import { AccountComponent } from './account/account.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
+import {AuthenticatedGuardService} from "./authenticated-guard.service";
 
 @NgModule({
   declarations: [
@@ -35,7 +35,6 @@ import { CustomerEditComponent } from './customer-edit/customer-edit.component';
     NavBarComponent,
     FooterComponent,
     ProductListComponent,
-    ProductCreatorComponent,
     ProductComponent,
     EditProductComponent,
     ImageComponent,
@@ -59,6 +58,7 @@ import { CustomerEditComponent } from './customer-edit/customer-edit.component';
     UtilService,
     AuthService,
     LoggedInGuardService,
+    AuthenticatedGuardService,
     [{provide: LocationStrategy, useClass: HashLocationStrategy}]],
   bootstrap: [AppComponent]
 })
