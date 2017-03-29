@@ -1,8 +1,6 @@
 package com.numbedme.app.repository;
 
-import com.numbedme.app.model.Comment;
-import com.numbedme.app.model.Customer;
-import com.numbedme.app.model.Product;
+import com.numbedme.app.model.entity.Comment;
 
 import java.util.List;
 

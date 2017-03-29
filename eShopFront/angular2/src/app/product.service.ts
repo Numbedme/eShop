@@ -15,8 +15,9 @@ export class ProductService {
                 this.url = util.url + '/products';
                }
 
-  getProducts():Observable<Product[]>{
-    return this.http.get(this.url).map(res => res.json());
+  getProducts(pattern:string, page:number, amount:number):Observable<any>{
+    let url:string = this.url + '?name=' + pattern + '&page=' + page + '&amount=' + amount;
+    return this.http.get(url).map(res => res.json());
   }
 
   saveProduct(product:Product):Observable<any>{
@@ -33,10 +34,6 @@ export class ProductService {
 
   updateProduct(product:Product):Observable<any>{
     return this.http.put(this.url + '/' + product.id, product);
-  }
-
-  getProductsByName(pattern: string):Observable<Product[]>{
-    return this.http.get(this.url + '?name=' + pattern).map((res) => res.json());
   }
 
 }

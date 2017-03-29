@@ -1,6 +1,4 @@
-package com.numbedme.app.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.numbedme.app.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;

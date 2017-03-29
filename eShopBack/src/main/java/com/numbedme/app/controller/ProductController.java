@@ -1,6 +1,7 @@
 package com.numbedme.app.controller;
 
-import com.numbedme.app.model.Product;
+import com.numbedme.app.model.dto.ProductDTO;
+import com.numbedme.app.model.entity.Product;
 import com.numbedme.app.service.CustomerService;
 import com.numbedme.app.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,25 @@ public class ProductController {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "/all")
     public List<Product> getProducts(@RequestParam(value = "name", required = false) String pattern) {
         if (pattern != null) {
             return service.findByPattern(pattern);
         } else {
             return service.findAllProducts();
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ProductDTO getProductPage(@RequestParam(value = "name", required = false, defaultValue = "") String pattern,
+                                        @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                        @RequestParam(value = "amount", required = false, defaultValue = "10") Integer amount){
+        List<Product> list = service.findProductsOnPageByPattern(pattern, page, amount);
+        long products = service.amountOfProducts(pattern);
+        ProductDTO dto = new ProductDTO();
+        dto.setPages((int)Math.ceil(products/(float)amount));
+        dto.setProducts(list);
+        return dto;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/customer/{id}")

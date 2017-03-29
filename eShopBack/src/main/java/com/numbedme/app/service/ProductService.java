@@ -1,7 +1,7 @@
 package com.numbedme.app.service;
 
-import com.numbedme.app.model.Customer;
-import com.numbedme.app.model.Product;
+import com.numbedme.app.model.entity.Customer;
+import com.numbedme.app.model.entity.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,4 +25,8 @@ public interface ProductService {
     List<Product> findByPattern(String pattern);
 
     List<Product> findCustomerProducts(Customer byId);
+
+    List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount);
+
+    long amountOfProducts(String pattern);
 }

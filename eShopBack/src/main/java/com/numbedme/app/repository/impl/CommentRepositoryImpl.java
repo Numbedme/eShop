@@ -1,6 +1,6 @@
 package com.numbedme.app.repository.impl;
 
-import com.numbedme.app.model.Comment;
+import com.numbedme.app.model.entity.Comment;
 import com.numbedme.app.repository.AbstractRepository;
 import com.numbedme.app.repository.CommentRepository;
 import org.springframework.stereotype.Repository;

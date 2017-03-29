@@ -1,7 +1,6 @@
 package com.numbedme.app.repository;
 
-import com.numbedme.app.model.Customer;
-import org.springframework.stereotype.Repository;
+import com.numbedme.app.model.entity.Customer;
 
 import java.util.List;
 

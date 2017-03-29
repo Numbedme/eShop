@@ -6,15 +6,20 @@
   </div>
   <div *ngIf="!products || products.length === 0">
     <div class="alert alert-warning" role="alert">
-      Oops! No products yet. Be the first one to <a routerLink="/create">create</a>
+      Oops! No products found which match your selection. Be the first one to <a routerLink="/create">create</a>
     </div>
   </div>
 
   <div *ngIf="products">
-    <div *ngFor="let product of products">
-      <app-product [product]="product"></app-product>
+    <div class="row list-group">
+      <div *ngFor="let product of products" >
+        <app-product [product]="product"></app-product>
+      </div>
     </div>
+    <ul class="pager">
+      <li class="previous"><a [routerLink]="['/home']" [queryParams]="{page:previousPage(), search:pattern}" >Previous</a></li>
+      <li class="next"><a [routerLink]="['/home']" [queryParams]="{page:nextPage(), search:pattern}">Next</a></li>
+    </ul>
   </div>
-
 </div>
 

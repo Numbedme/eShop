@@ -1,8 +1,7 @@
 package com.numbedme.app.service.impl;
 
-import com.numbedme.app.model.Customer;
-import com.numbedme.app.model.Product;
-import com.numbedme.app.repository.CustomerRepository;
+import com.numbedme.app.model.entity.Customer;
+import com.numbedme.app.model.entity.Product;
 import com.numbedme.app.repository.ProductRepository;
 import com.numbedme.app.service.ProductService;
 import org.hibernate.Hibernate;
@@ -61,5 +60,15 @@ public class ProductServiceImpl implements ProductService {
         }
         Hibernate.initialize(customer);
         return customer.getProducts();
+    }
+
+    @Override
+    public List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount) {
+        return repository.findProductsOnPageByPattern(pattern, page, amount);
+    }
+
+    @Override
+    public long amountOfProducts(String pattern) {
+        return repository.amountOfProducts(pattern);
     }
 }

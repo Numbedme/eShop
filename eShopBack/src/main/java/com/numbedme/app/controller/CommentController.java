@@ -1,9 +1,7 @@
 package com.numbedme.app.controller;
 
-import com.numbedme.app.model.Comment;
+import com.numbedme.app.model.entity.Comment;
 import com.numbedme.app.service.CommentService;
-import com.numbedme.app.service.CustomerService;
-import com.numbedme.app.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
