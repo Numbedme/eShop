@@ -1,6 +1,6 @@
 package com.numbedme.app.service;
 
-import com.numbedme.app.model.Customer;
+import com.numbedme.app.model.entity.Customer;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.numbedme.app.service;
 
-import com.numbedme.app.model.Comment;
+import com.numbedme.app.model.entity.Comment;
 
 import java.util.List;
 

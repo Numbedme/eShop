@@ -1,6 +1,6 @@
 package com.numbedme.app.repository.impl;
 
-import com.numbedme.app.model.Customer;
+import com.numbedme.app.model.entity.Customer;
 import com.numbedme.app.repository.AbstractRepository;
 import com.numbedme.app.repository.CustomerRepository;
 import org.hibernate.criterion.Restrictions;

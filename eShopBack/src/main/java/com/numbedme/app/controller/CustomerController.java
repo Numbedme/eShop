@@ -2,7 +2,7 @@ package com.numbedme.app.controller;
 
 import com.numbedme.app.exception.InvalidLoginException;
 import com.numbedme.app.exception.NotExistingCustomerException;
-import com.numbedme.app.model.Customer;
+import com.numbedme.app.model.entity.Customer;
 import com.numbedme.app.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

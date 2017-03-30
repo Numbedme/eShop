@@ -86,7 +86,7 @@
                                     <goal>npm</goal>
                                 </goals>
                                 <configuration>
-                                    <arguments>install --save-dev @angular/cli@latest</arguments>
+                                    <arguments>install --save @angular/cli@latest</arguments>
                                 </configuration>
                             </execution>
 

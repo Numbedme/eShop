@@ -4,6 +4,7 @@ import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
 import {UtilService} from './util.service';
 import 'rxjs/Rx';
+import {Customer} from "./customer";
 
 @Injectable()
 export class ProductService {
@@ -15,8 +16,9 @@ export class ProductService {
                 this.url = util.url + '/products';
                }
 
-  getProducts():Observable<Product[]>{
-    return this.http.get(this.url).map(res => res.json());
+  getProducts(pattern:string, page:number, amount:number):Observable<any>{
+    let url:string = this.url + '?name=' + pattern + '&page=' + page + '&amount=' + amount;
+    return this.http.get(url).map(res => res.json());
   }
 
   saveProduct(product:Product):Observable<any>{
@@ -35,8 +37,7 @@ export class ProductService {
     return this.http.put(this.url + '/' + product.id, product);
   }
 
-  getProductsByName(pattern: string):Observable<Product[]>{
-    return this.http.get(this.url + '?name=' + pattern).map((res) => res.json());
+  getProductsForCustomer(customer: Customer):Observable<Product[]> {
+    return this.http.get(this.url + '/customer/' + customer.id).map(res => res.json());
   }
-
 }

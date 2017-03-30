@@ -1,6 +1,4 @@
-package com.numbedme.app.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.numbedme.app.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,7 +22,7 @@ public class Product implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
 
     @Lob

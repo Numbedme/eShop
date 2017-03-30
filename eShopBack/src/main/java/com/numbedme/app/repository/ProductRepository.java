@@ -1,7 +1,6 @@
 package com.numbedme.app.repository;
 
-import com.numbedme.app.model.Customer;
-import com.numbedme.app.model.Product;
+import com.numbedme.app.model.entity.Product;
 
 import java.util.List;
 
@@ -20,4 +19,10 @@ public interface ProductRepository {
     List<Product> findAllProducts();
 
     List<Product> findByPattern(String pattern);
+
+    List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount);
+
+    long amountOfProducts(String pattern);
+
+    List<Product> findCustomerProducts(int customerId);
 }

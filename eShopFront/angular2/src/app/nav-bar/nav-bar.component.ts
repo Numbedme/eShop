@@ -21,7 +21,7 @@ export class NavBarComponent implements OnInit {
   }
 
   onSubmit(search:string):void{
-    this.router.navigate(['search', search]);
+    this.router.navigate(['home'], {queryParams: { search: search}});
   }
 
   logout():void{

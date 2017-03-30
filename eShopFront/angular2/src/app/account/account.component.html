@@ -17,9 +17,11 @@
   </div>
 
   <div *ngIf="customer.products">
-    <h1 class="modal-header">Here is a list of your products</h1>
-    <div *ngFor="let product of customer.products">
+    <h1 class="modal-header">List of your advertisements</h1>
+    <div *ngFor="let product of customer.products" class="row list-group">
       <app-product [product]="product"></app-product>
+      <button class="btn btn-default" [routerLink]="['/edit', product.id]">Edit</button>
+      <button class="btn btn-default" (click)="deleteProduct(product)">Delete</button>
     </div>
   </div>
 </div>

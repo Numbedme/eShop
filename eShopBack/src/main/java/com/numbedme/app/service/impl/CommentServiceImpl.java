@@ -1,6 +1,6 @@
 package com.numbedme.app.service.impl;
 
-import com.numbedme.app.model.Comment;
+import com.numbedme.app.model.entity.Comment;
 import com.numbedme.app.repository.CommentRepository;
 import com.numbedme.app.service.CommentService;
 import org.hibernate.Hibernate;

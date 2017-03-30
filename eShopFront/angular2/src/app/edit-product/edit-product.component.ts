@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import { ProductService } from '../product.service';
-import { Product } from '../product';
-import { FormBuilder, AbstractControl, FormGroup, FormControl, Validators } from '@angular/forms'
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ProductService} from '../product.service';
+import {Product} from '../product';
+import {FormBuilder, AbstractControl, FormGroup, Validators} from '@angular/forms'
 import {isUndefined} from "util";
-import {Customer} from "../customer";
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-edit-product',
@@ -14,30 +14,28 @@ import {Customer} from "../customer";
 export class EditProductComponent implements OnInit {
 
   private product: Product;
-  private customer:Customer;
 
   private form: FormGroup;
   private name: AbstractControl;
   private desc: AbstractControl;
   private price: AbstractControl;
-  private date: AbstractControl;
   private pic: string;
-  private edit:boolean;
+  private edit: boolean;
+  private buttonText: string;
 
 
-  constructor(private router: Router,
-    private service: ProductService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute) { }
+  constructor(private service: ProductService,
+              private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private auth: AuthService) {
+  }
 
   ngOnInit() {
     this.route.params
       .map(params => params['id'])
       .subscribe((id) => {
         this.edit = !isUndefined(id);
-        console.log(typeof id);
-        console.log(this.edit);
-        if (this.edit){
+        if (this.edit) {
           this.initEdit(id);
         } else {
           this.initCreate();
@@ -62,13 +60,15 @@ export class EditProductComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let product:Product;
-    if (this.pic === null){
-      product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, null);
+    let product: Product;
+    if (this.pic === null) {
+      product = new Product(this.name.value, this.desc.value, this.price.value, new Date(), null);
+
     } else if (this.pic.startsWith("data:image")) {
-      product = new Product(this.name.value, this.desc.value, this.price.value, this.date.value, this.pic);
+      product = new Product(this.name.value, this.desc.value, this.price.value, new Date(), this.pic);
     }
-    if (this.edit){
+    product.customer = this.auth.customer;
+    if (this.edit) {
       product.id = this.product.id;
       this.service.updateProduct(product).subscribe(
         res => console.log(res)
@@ -81,38 +81,36 @@ export class EditProductComponent implements OnInit {
 
   }
 
-  initEdit(id:number):void{
+  initEdit(id: number): void {
     this.service.getProduct(id)
-      .subscribe((product:Product)=> {
+      .subscribe((product: Product) => {
         this.product = product;
         this.form = this.fb.group({
           'name': [product.name, Validators.required],
           'desc': [product.description, Validators.required],
           'price': [product.price, Validators.required],
-          'date': [product.startDate, Validators.required],
           'pic': '',
         });
         this.name = this.form.controls['name'];
         this.desc = this.form.controls['desc'];
         this.price = this.form.controls['price'];
-        this.date = this.form.controls['date'];
         this.pic = product.picture;
       });
+    this.buttonText = 'Edit';
   }
 
-  initCreate():void{
+  initCreate(): void {
     this.form = this.fb.group({
       'name': ['', Validators.required],
       'desc': ['', Validators.required],
       'price': ['', Validators.required],
-      'date': ['', Validators.required],
       'pic': '',
     });
     this.name = this.form.controls['name'];
     this.desc = this.form.controls['desc'];
     this.price = this.form.controls['price'];
-    this.date = this.form.controls['date'];
     this.pic = null;
+    this.buttonText = 'Create';
   }
 
 }

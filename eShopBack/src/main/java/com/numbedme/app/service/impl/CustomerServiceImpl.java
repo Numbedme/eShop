@@ -1,6 +1,6 @@
 package com.numbedme.app.service.impl;
 
-import com.numbedme.app.model.Customer;
+import com.numbedme.app.model.entity.Customer;
 import com.numbedme.app.repository.CustomerRepository;
 import com.numbedme.app.service.CustomerService;
 import com.numbedme.app.service.MessageService;

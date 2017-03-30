@@ -1,8 +1,6 @@
 package com.numbedme.app.service.impl;
 
-import com.numbedme.app.model.Customer;
-import com.numbedme.app.model.Product;
-import com.numbedme.app.repository.CustomerRepository;
+import com.numbedme.app.model.entity.Product;
 import com.numbedme.app.repository.ProductRepository;
 import com.numbedme.app.service.ProductService;
 import org.hibernate.Hibernate;
@@ -55,11 +53,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findCustomerProducts(Customer customer) {
-        if (customer == null){
-            throw new NullPointerException("Customer entity is null");
-        }
-        Hibernate.initialize(customer);
-        return customer.getProducts();
+    public List<Product> findCustomerProducts(int customerId) {
+        return repository.findCustomerProducts(customerId);
+    }
+
+    @Override
+    public List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount) {
+        return repository.findProductsOnPageByPattern(pattern, page, amount);
+    }
+
+    @Override
+    public long amountOfProducts(String pattern) {
+        return repository.amountOfProducts(pattern);
     }
 }
