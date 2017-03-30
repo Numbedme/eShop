@@ -28,6 +28,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import {AuthenticatedGuardService} from "./authenticated-guard.service";
+import {DescriptionPipe} from "./app.pipes";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {AuthenticatedGuardService} from "./authenticated-guard.service";
     ProductDetailsComponent,
     CustomerInfoComponent,
     CustomerEditComponent,
+    DescriptionPipe
   ],
   imports: [
     BrowserModule,

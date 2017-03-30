@@ -46,7 +46,7 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/customer/{id}")
     public List<Product> getProductsOfCustomer(@PathVariable("id") int id){
-        return service.findCustomerProducts(customerService.findById(id));
+        return service.findCustomerProducts(id);
     }
 
 
@@ -66,7 +66,6 @@ public class ProductController {
             service.updateProduct(product);
         }
     }
-
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteProduct(@PathVariable("id") int id) {

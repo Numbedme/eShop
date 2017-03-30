@@ -59,6 +59,7 @@ public class ProductRepositoryImpl extends AbstractRepository<Integer, Product> 
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount) {
         Query query = getSession().createQuery("SELECT p from Product p WHERE name LIKE :pattern ORDER BY startDate desc");
         query.setParameter("pattern", "%" + pattern + "%");
@@ -72,6 +73,14 @@ public class ProductRepositoryImpl extends AbstractRepository<Integer, Product> 
         Query query = getSession().createQuery("SELECT count(p.id) from Product p WHERE p.name LIKE :pattern");
         query.setParameter("pattern", "%" + pattern + "%");
         return (long) query.uniqueResult();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Product> findCustomerProducts(int customerId) {
+        Query query = getSession().createQuery("SELECT p FROM Product p WHERE p.customer.id = :id ORDER BY startDate desc");
+        query.setParameter("id", customerId);
+        return query.list();
     }
 
 }

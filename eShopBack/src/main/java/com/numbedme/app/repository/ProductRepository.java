@@ -23,4 +23,6 @@ public interface ProductRepository {
     List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount);
 
     long amountOfProducts(String pattern);
+
+    List<Product> findCustomerProducts(int customerId);
 }

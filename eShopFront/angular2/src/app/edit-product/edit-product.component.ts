@@ -63,10 +63,11 @@ export class EditProductComponent implements OnInit {
     let product: Product;
     if (this.pic === null) {
       product = new Product(this.name.value, this.desc.value, this.price.value, new Date(), null);
-      product.customer = this.auth.customer;
+
     } else if (this.pic.startsWith("data:image")) {
       product = new Product(this.name.value, this.desc.value, this.price.value, new Date(), this.pic);
     }
+    product.customer = this.auth.customer;
     if (this.edit) {
       product.id = this.product.id;
       this.service.updateProduct(product).subscribe(

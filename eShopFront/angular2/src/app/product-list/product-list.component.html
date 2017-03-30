@@ -1,6 +1,6 @@
 <div class="container">
   <div class="jumbotron">
-    <h1>Hello, world!</h1>
+    <h1 id="list-head">Hello, world!</h1>
     <p>Welcome to a brand new eShop</p>
     <p><a class="btn btn-primary btn-lg" routerLink="/about" role="button">Learn more</a></p>
   </div>
@@ -11,13 +11,22 @@
   </div>
 
   <div *ngIf="products">
-    <div class="row list-group">
-      <div *ngFor="let product of products" >
-        <app-product [product]="product"></app-product>
+    <div class="list-group">
+      <div *ngFor="let product of products;let i = index">
+        <div class="row" *ngIf="i%3===0">
+          <app-product [product]="products[i]"></app-product>
+          <div *ngIf="products[i + 1]">
+            <app-product [product]="products[i + 1]"></app-product>
+          </div>
+          <div *ngIf="products[i + 2]">
+            <app-product [product]="products[i + 2]"></app-product>
+          </div>
+        </div>
       </div>
     </div>
     <ul class="pager">
-      <li class="previous"><a [routerLink]="['/home']" [queryParams]="{page:previousPage(), search:pattern}" >Previous</a></li>
+      <li class="previous"><a [routerLink]="['/home']"
+                              [queryParams]="{page:previousPage(), search:pattern}">Previous</a></li>
       <li class="next"><a [routerLink]="['/home']" [queryParams]="{page:nextPage(), search:pattern}">Next</a></li>
     </ul>
   </div>

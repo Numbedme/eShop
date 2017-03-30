@@ -4,6 +4,7 @@ import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
 import {UtilService} from './util.service';
 import 'rxjs/Rx';
+import {Customer} from "./customer";
 
 @Injectable()
 export class ProductService {
@@ -36,4 +37,7 @@ export class ProductService {
     return this.http.put(this.url + '/' + product.id, product);
   }
 
+  getProductsForCustomer(customer: Customer):Observable<Product[]> {
+    return this.http.get(this.url + '/customer/' + customer.id).map(res => res.json());
+  }
 }
