@@ -3,7 +3,6 @@ package com.numbedme.app.service.impl;
 import com.numbedme.app.model.entity.Product;
 import com.numbedme.app.repository.ProductRepository;
 import com.numbedme.app.service.ProductService;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,8 +57,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount) {
-        return repository.findProductsOnPageByPattern(pattern, page, amount);
+    public List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount, String cusId) {
+        return repository.findProductsOnPageByPattern(pattern, page, amount, cusId);
     }
 
     @Override

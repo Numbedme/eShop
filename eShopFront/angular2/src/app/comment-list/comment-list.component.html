@@ -1,0 +1,16 @@
+<form class="form" (ngSubmit)="onSubmit(text.value)">
+  <textarea class="form-control" placeholder="Enter your comment" rows="" #text></textarea>
+  <input type="submit" class="btn btn-primary btn-sm pull-right" value="Post">
+</form>
+<br>
+<div class="media-list" *ngFor="let comment of comments">
+  <div class="media">
+    <div class="media-left media-bottom">
+      <app-image [imageBase64]="comment.customer.pic"></app-image>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{comment.customer.login}} <small><i>Posted on {{comment.date | date:'medium'}}</i></small></h4>
+      <p>{{comment.text}}</p>
+    </div>
+  </div>
+</div>

@@ -5,16 +5,31 @@
       <app-image [imageBase64]="product.picture"></app-image>
     </div>
     <div class="col-xs-6 col-lg-6">
-      <p class="lead">Owner: {{product.customer.login}}</p>
-      <p class="">Owner contact: {{product.customer.email}}</p>
-      <p class="">Price: {{product.price | currency:'USD':true}}</p>
-      <p class="">Since: {{product.startDate | date:'medium'}}</p>
+      <div class="lead">Owner: {{product.customer.login}}</div>
+      <div class="">Owner contact:
+        <p *ngIf="this.auth.isLoggedIn()">
+          {{product.customer.email}}
+        </p>
+        <p *ngIf="!this.auth.isLoggedIn()" class="">
+          <a [routerLink]="['/login']" class="alert-link">Log in</a> to see sellers contacts
+        </p>
+      </div>
+      <div class="">Price: <p>{{product.price | currency:'USD':true}}</p></div>
+      <div class="">Since: <p>{{product.startDate | date:'medium'}}</p></div>
     </div>
   </div>
-  <div class="container">
-    <p class="modal-header">Description:</p>
-    <p>
-      {{product.description}}
-    </p>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#desc">Description</a></li>
+    <li><a data-toggle="tab" href="#comments">Comments</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="desc" class="tab-pane fade in active">
+      <p>{{product.description}}</p>
+    </div>
+    <div id="comments" class="tab-pane fade">
+      <app-comment-list [comments]="comments" [product]="product" (onComment)="postComment($event)"></app-comment-list>
+    </div>
   </div>
 </div>

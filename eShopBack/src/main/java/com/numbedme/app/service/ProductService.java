@@ -25,7 +25,7 @@ public interface ProductService {
 
     List<Product> findCustomerProducts(int byId);
 
-    List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount);
+    List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount, String cusId);
 
     long amountOfProducts(String pattern);
 }

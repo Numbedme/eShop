@@ -3,7 +3,6 @@ package com.numbedme.app.repository.impl;
 import com.numbedme.app.model.entity.Product;
 import com.numbedme.app.repository.AbstractRepository;
 import com.numbedme.app.repository.ProductRepository;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
@@ -60,9 +59,10 @@ public class ProductRepositoryImpl extends AbstractRepository<Integer, Product> 
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount) {
-        Query query = getSession().createQuery("SELECT p from Product p WHERE name LIKE :pattern ORDER BY startDate desc");
+    public List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount, String cusId) {
+        Query query = getSession().createQuery("SELECT p from Product p WHERE name LIKE :pattern AND p.customer.login LIKE :id ORDER BY startDate desc");
         query.setParameter("pattern", "%" + pattern + "%");
+        query.setParameter("id", "%" + cusId + "%");
         query.setFirstResult((page * amount) - amount);
         query.setMaxResults(amount);
         return query.list();

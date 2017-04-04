@@ -12,6 +12,9 @@ import {Product} from "../product";
 export class AccountComponent implements OnInit {
 
   private customer: Customer;
+  private page = 1;
+  private amount = 10;
+  private totalPages;
 
 
   constructor(private auth: AuthService,
@@ -33,10 +36,27 @@ export class AccountComponent implements OnInit {
   }
 
   updateCustomersProducts(): void {
-    this.productService.getProductsForCustomer(this.customer)
-      .subscribe((products: Product[]) => {
-        this.customer.products = products;
+    this.productService.getProducts("", this.page, this.amount, this.customer.login)
+      .subscribe(response => {
+        this.totalPages = response.pages;
+        this.customer.products = response.products;
       });
+  }
+
+  previousPage(): void {
+    if (this.page>1){
+      this.page--;
+      this.updateCustomersProducts();
+    }
+
+  }
+
+  nextPage():void {
+    if (this.page<this.totalPages){
+      this.page++;
+      this.updateCustomersProducts();
+    }
+
   }
 
 }

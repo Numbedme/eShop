@@ -26,14 +26,15 @@ export class CustomerRegistrationComponent implements OnInit {
   constructor(private service:CustomerService,
               private builder:FormBuilder,
               private auth:AuthService) {
+
   }
 
   ngOnInit() {
     this.form = this.builder.group({
-      login: ['', Validators.required],
-      password: ['', Validators.required],
-      confirm: ['', Validators.required],
-      email: ['', Validators.required]
+      login: ['', Validators.compose([Validators.required, Validators.minLength(3)]) ],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      confirm: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.email])]
     });
 
     this.login = this.form.controls['login'];

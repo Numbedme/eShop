@@ -29,6 +29,8 @@ import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import {AuthenticatedGuardService} from "./authenticated-guard.service";
 import {DescriptionPipe} from "./app.pipes";
+import { CommentListComponent } from './comment-list/comment-list.component';
+import {CommentService} from "./comment.service";
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import {DescriptionPipe} from "./app.pipes";
     ProductDetailsComponent,
     CustomerInfoComponent,
     CustomerEditComponent,
-    DescriptionPipe
+    DescriptionPipe,
+    CommentListComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import {DescriptionPipe} from "./app.pipes";
     AuthService,
     LoggedInGuardService,
     AuthenticatedGuardService,
+    CommentService,
     [{provide: LocationStrategy, useClass: HashLocationStrategy}]],
   bootstrap: [AppComponent]
 })

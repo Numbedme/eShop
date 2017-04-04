@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <div *ngIf="products">
+  <div *ngIf="!(!products || products.length === 0)">
     <div class="list-group">
       <div *ngFor="let product of products;let i = index">
         <div class="row" *ngIf="i%3===0">

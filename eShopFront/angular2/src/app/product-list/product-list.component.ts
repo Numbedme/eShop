@@ -33,7 +33,7 @@ export class ProductListComponent implements OnInit {
   }
 
   refreshProductList(): void {
-    this.service.getProducts(this.pattern, this._currentPage, this._pageSize).subscribe(
+    this.service.getProducts(this.pattern, this._currentPage, this._pageSize, "").subscribe(
       productDTO => {
         this.products = productDTO.products;
         this.amountOfPages = productDTO.pages;

@@ -16,12 +16,20 @@
     </div>
   </div>
 
-  <div *ngIf="customer.products">
+  <div *ngIf="!(!customer.products || customer.products.length === 0)">
     <h1 class="modal-header">List of your advertisements</h1>
+    <ul class="pager">
+      <li class="previous"><a (click)="previousPage()" >Previous</a></li>
+      <li class="next"><a (click)="nextPage()">Next</a></li>
+    </ul>
     <div *ngFor="let product of customer.products" class="row list-group">
       <app-product [product]="product"></app-product>
       <button class="btn btn-default" [routerLink]="['/edit', product.id]">Edit</button>
       <button class="btn btn-default" (click)="deleteProduct(product)">Delete</button>
     </div>
+    <ul class="pager">
+      <li class="previous"><a (click)="previousPage()" >Previous</a></li>
+      <li class="next"><a (click)="nextPage()">Next</a></li>
+    </ul>
   </div>
 </div>

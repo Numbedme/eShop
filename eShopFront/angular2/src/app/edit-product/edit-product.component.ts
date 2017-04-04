@@ -45,7 +45,6 @@ export class EditProductComponent implements OnInit {
 
   onChange(event) {
     let file: File = event.target.files[0];
-    console.log(file.type);
     if (file && file.type.startsWith("image")) {
       let fr: FileReader = new FileReader();
       fr.onloadend = (e) => {

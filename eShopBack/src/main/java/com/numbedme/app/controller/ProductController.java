@@ -35,8 +35,9 @@ public class ProductController {
     @RequestMapping(method = RequestMethod.GET)
     public ProductDTO getProductPage(@RequestParam(value = "name", required = false, defaultValue = "") String pattern,
                                         @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                        @RequestParam(value = "amount", required = false, defaultValue = "10") Integer amount){
-        List<Product> list = service.findProductsOnPageByPattern(pattern, page, amount);
+                                        @RequestParam(value = "amount", required = false, defaultValue = "10") Integer amount,
+                                        @RequestParam(value = "cusId", required = false, defaultValue = "") String cusId){
+        List<Product> list = service.findProductsOnPageByPattern(pattern, page, amount, cusId);
         long products = service.amountOfProducts(pattern);
         ProductDTO dto = new ProductDTO();
         dto.setPages((int)Math.ceil(products/(float)amount));

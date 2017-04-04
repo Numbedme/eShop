@@ -20,7 +20,7 @@ public interface ProductRepository {
 
     List<Product> findByPattern(String pattern);
 
-    List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount);
+    List<Product> findProductsOnPageByPattern(String pattern, Integer page, Integer amount, String cusId);
 
     long amountOfProducts(String pattern);
 
