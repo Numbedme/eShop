@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService implements MessageService {
 
-    @Autowired
-    private MailSender sender;
+    /*@Autowired
+    private MailSender sender;*/
 
     @Override
     public void sendMessage(String to, String from, String message, String subject) {
@@ -24,7 +24,7 @@ public class EmailService implements MessageService {
         msg.setSubject(subject);
         msg.setTo(to);
 
-        sender.send(msg);
+        //sender.send(msg);
     }
 
 

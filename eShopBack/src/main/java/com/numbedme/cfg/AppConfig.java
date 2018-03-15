@@ -40,8 +40,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
     }
 
-    @Bean
-    public MailSender mailSender(){
+    //@Bean
+    /*public MailSender mailSender(){
         JavaMailSenderImpl sender = new JavaMailSenderImpl();
         sender.setHost(environment.getProperty("smtp.host"));
         sender.setPort(Integer.parseInt(environment.getProperty("smtp.port")));
@@ -56,7 +56,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         sender.setJavaMailProperties(properties);
 
         return sender;
-    }
+    }*/
 
     @Bean
     public MultipartResolver multipartResolver() {
